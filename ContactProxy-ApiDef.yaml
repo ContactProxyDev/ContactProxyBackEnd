@@ -1,0 +1,631 @@
+openapi: 3.0.0
+info:
+  title: ContactProxyAPI
+  description: API for backend part of ContactProxy
+  version: "0.5"
+
+paths:
+    /autorize/login:
+        post:
+            tags:
+            - Auth
+            summary: Method to log in
+            operationId: login
+            responses:
+                "200":
+                    description: Successful log in
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/JWTResponse'
+                "400":
+                    description: No such user found
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /authorize/register:
+        post:
+            tags:
+            -Auth
+            summary: Method to register user
+            operationId: register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserDTO'
+                required: true
+            responses:
+                "200":
+                    description: Successful register
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/JWTResponse'
+                "400":
+                    description: This email has already been registered
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /authorize/forgotPassword:
+        post:
+            tags:
+            -Auth
+            summary: Method to refresh user's password
+            operationId: fordotPassword
+            responses:
+                "200":
+                    description: User succesfully refreshed password
+                    content:
+                        application/json: {}
+                "400":
+                    description: This password is already using
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /cards/{user_id}:
+        get:
+            tags:
+            -Cards
+            summary: Method to get current user's all cards
+            operationId: getUsersCards
+            parameters: 
+            - name: user_id
+              in: path
+              description: User ID
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                example: 123
+            responses:
+                "200":
+                    description: Successful response with users all cards
+                    content: 
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Cards'
+                "204":
+                    description: Current users doesn't have any cards
+                default:
+                    description: When something went wrong
+                    content: 
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /cards/{card_id}:
+        get:
+            tags:
+            -Cards
+            summary: Method to get card by id 
+            operationId: getCardById
+            parameters: 
+            - name: card_id
+              in: path
+              description: Card ID
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                example: 12
+            responses:
+                "200":
+                    description: Successful response with users all cards
+                    content: 
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CardDTO'
+                "400":
+                    description: Card with this id doesn't exist
+                default:
+                    description: When something went wrong
+                    content: 
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /cards/{card_id}/delete:    
+        delete:
+            tags:
+            - Cards
+            summary: Method to delete card
+            operationId: deleteById
+            parameters:
+            - name: card_id
+              in: path
+              description: Card id
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                example: 12
+            responses:
+                "200":
+                    description: Successful delete
+                    content:
+                        application/json: {}
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#components/schemas/Error'
+    /cards/{card_id}/edit:    
+        put:
+            tags:
+            - Cards
+            summary: Method to edit card
+            operationId: editById
+            parameters:
+            - name: card_id
+              in: path
+              description: Card id
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                example: 12
+            responses:
+                "200":
+                    description: Successful editing card
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#components/schemas/CardDTO'
+                "400":
+                    description: Card with this id doesn't exist
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#components/schemas/Error'
+    /cards/{card_id}/save:
+        post:
+            tags:
+            - Cards
+            summary: Method to save card
+            operationId: saveById
+            parameters:
+            - name: card_id
+              in: path
+              description: Card id
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                example: 12
+            responses:
+                "200":
+                    description: Successful save
+                    content:
+                        application/json: {}
+                default:
+                    description: When something went wrong
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#components/schemas/Error'
+    /cards/create:
+        post:
+            tags:
+            - Cards
+            summary: Method to create new card
+            operationId: createCard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CardDTO'
+                required: true
+            responses:
+                "200":
+                  description: Successful card creation
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/CardDTO'
+                default:
+                  description: When something goes wrong
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Error'        
+
+components:
+  schemas:
+    User:
+        required:
+            - id
+            - email 
+            - password
+            - roles
+        type: object
+        properties: 
+            id:
+                type: integer
+                example: 123
+            email:
+                type: string
+                example: i.ivanov@g.nsu.ru
+            password:
+                type: string
+                example: password
+            roles:
+                type: Roles
+                example: [BRO, ADMIN]
+            url:
+                type: string
+                example: krasivyi-url
+    UserDTO:
+        required:
+            - id
+            - email 
+            - password
+            - roles
+            - userFields
+        type: object
+        properties: 
+            id:
+                type: integer
+                example: 123
+            email:
+                type: string
+                example: i.ivanov@g.nsu.ru
+            password:
+                type: string
+                example: password
+            roles:
+                $ref: '#/components/schemas/Roles'
+            userFields:
+                $ref: '#/components/schemas/UserFields'
+            url:
+                type: string
+                example: krasivyi-url
+    Card:
+        required: 
+            - id
+            - ownerId
+            - name
+            - creationDate
+            - viewCounter
+            - maxViewCount
+            - maxViewDate
+            - isVisible
+            - isOnlyForAuthorizedUsers
+            - isOnlyWithPermission
+            - isDeleted
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 12
+            ownerId:
+                type: integer
+                example: 123
+            name:
+                type: string
+                example: card
+            creationDate:
+                type: string
+                description: Date of card creation
+                format: date-time
+                example: 2021-01-30T08:30:00Z
+            viewCounter:
+                type: integer
+                example: 10
+            maxViewCount:
+                type: integer
+                description: Top border of view counter
+                example: 15
+            maxViewDate:
+                type: string
+                description: Top border of card existing
+                format: date-time
+                example: 2021-01-31T08:30:00Z
+            url:
+                type: string
+                example: krasivyi-url
+            isVisible:
+                type: boolean                
+            isOnlyForAuthorizedUsers:
+                type: boolean                
+            isOnlyWithPermission:
+                type: boolean                
+            isDeleted:
+                type: boolean
+    CardDTO:
+        required: 
+            - name
+            - maxViewCount
+            - maxViewDate
+            - url
+            - isVisible
+            - isOnlyForAuthorizedUsers
+            - isOnlyWithPermission
+            - cardFields
+        type: object
+        properties:
+            name:
+                type: string
+                example: card
+            creationDate:
+                type: string
+                description: Date of card creation
+                format: date-time
+                example: 2021-01-30T08:30:00Z
+            viewCounter:
+                type: integer
+                example: 10
+            maxViewCount:
+                type: integer
+                description: Top border of view counter
+                example: 15
+            maxViewDate:
+                type: string
+                description: Top border of card existing
+                format: date-time
+                example: 2021-01-31T08:30:00Z
+            url:
+                type: string
+                example: krasivyi-url
+            isVisible:
+                type: boolean                
+            isOnlyForAuthorizedUsers:
+                type: boolean                
+            isOnlyWithPermission:
+                type: boolean                
+            isDeleted:
+                type: boolean
+            cardFields:
+                $ref: '#/components/schemas/CardFields'
+    Cards:
+        type: array
+        items: 
+            $ref: '#/components/schemas/Card'
+    CardField:
+        required: 
+            - id 
+            - cardId
+            - fieldName
+            - fieldData
+            - cardFieldTypeId
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 12
+            cardId:
+                type: integer
+                example: 12
+            fieldName:
+                type: string
+                description: Specific card's field name
+                example: card field
+            fieldData:
+                type: string
+                example: I am data
+            cardFieldTypeId:
+                type: string
+                example: field type
+    CardFields:
+        type: array
+        items: 
+            $ref: '#/components/schemas/CardFields'
+    Role:
+        required:
+            - id
+            - name
+        type: object
+        properties:
+            id: 
+                type: integer
+                example: 123
+            name: 
+                type: string
+                example: BRO
+    Roles:
+        type: array
+        items:
+            $ref: '#/components/schemas/Role'
+    RoleAttachedField:
+        required: 
+            - id
+            - roleId
+            - userFieldTypeId
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 123
+            roleId:
+                type: integer
+                example: 123
+            userFieldTypeId:
+                type: integer
+                example: 123 
+    UserField:
+        required: 
+            - userId
+            - userFieldId
+            - fieldData
+        type: object
+        properties:
+            userId:
+                type: integer
+                example: 123
+            userFieldId:
+                type: integer
+                example: 123
+            fieldData:
+                type: string
+                example: I am data
+    UserFields:
+        type: array
+        items: 
+            $ref: '#/components/schemas/UserFields'
+    UserFieldType:
+        required:
+            - roleId
+            - fieldName
+            - isOptional
+            - isCopyAble
+            - template
+        type: object
+        properties:
+            roleId:
+                type: integer
+                example: 123
+            fieldName:
+                type: string
+                description: Specific fields to different users
+                example: first-name
+            isOptional:
+                type: boolean
+            isCopyAble:
+                type: boolean               
+            template:
+                type: string
+                example: specific-template
+    UserFieldTypes:
+        type: array
+        items:
+            $ref: '#/components/schemas/UserFieldType'
+    CardFieldType:
+        required: 
+            - id
+            - name
+            - isCopyAble
+            - template
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 123
+            name:
+                type: string
+                example: field-name
+            isCopyable:
+                type: boolean
+            template:
+                type: string
+                example: specific-template
+    CardViewRecord:
+        required:
+            - userId
+            - cardId
+        type: object
+        properties:
+            userId:
+                type: integer
+                example: 123
+            cardId:
+                type: integer
+                example: 12
+    CardViewHistory:
+        type: array
+        items:
+            $ref: '#/components/schemas/CardViewRecord'
+    SavedCard:
+        required:
+            - ownerId
+            - cardId
+        type: object
+        properties: 
+            ownerId:
+                type: integer
+                example: 123
+            cardId:
+                type: integer
+                example: 12
+    SavedCards:
+        type: array
+        items:
+            $ref: '#/components/schemas/SavedCard'
+    CardUserPermission:
+        required: 
+            - ownerId
+            - cardId
+        type: object
+        properties:
+            ownerId:
+                type: integer
+                example: 123
+            cardId:
+                type: integer
+                example: 12
+    PermissionRequest:
+        required:
+            - id
+            - requestingUserId
+            - requestedCardId
+            - requestState
+            - requestDate
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 1234
+            requestingUserId:
+                type: integer
+                example: 123
+            requestedCardId:
+                type: integer
+                example: 12
+            requestState:
+                type: string
+            requestDate:
+                type: string
+                description: Date of request creation
+                format: date-time
+                example: 2021-01-30T08:30:00Z
+    PermissionRequests:
+        type: array
+        items:
+            $ref: '#/components/schemas/PermissionRequest'
+    RequestState:
+        required: 
+            - id
+            - stateName
+        type: object
+        properties:
+            id:
+                type: integer
+                example: 12435
+            stateName:
+                type: string
+    JWTResponse:
+        type: object
+        properties:
+            userId:
+                type: integer
+                example: 123
+            jwt:
+                type: string
+                description: uniquely generated token for each user
+                example: ab1cd2e.f3gh4ij5k.l6mn7op8
+    Error:
+        required:
+            - name
+            - description
+        type: object
+        properties:
+            name:
+                type: string
+                example: Bad Request!
+            description:
+                type: string
+                example: Check input parameters
