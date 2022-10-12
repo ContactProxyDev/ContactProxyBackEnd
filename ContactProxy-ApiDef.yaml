@@ -3,6 +3,10 @@ info:
   title: ContactProxyAPI
   description: API for backend part of ContactProxy
   version: "0.5"
+  
+servers:
+  - url: http://localhost:8181/contact-proxy
+    description: api server
 
 paths:
     /autorize/login:
@@ -29,7 +33,7 @@ paths:
     /authorize/register:
         post:
             tags:
-            -Auth
+            - Auth
             summary: Method to register user
             operationId: register
             requestBody:
@@ -56,7 +60,7 @@ paths:
     /authorize/forgotPassword:
         post:
             tags:
-            -Auth
+            - Auth
             summary: Method to refresh user's password
             operationId: fordotPassword
             responses:
@@ -75,7 +79,7 @@ paths:
     /cards/all/{user_id}:
         get:
             tags:
-            -Cards
+            - Cards
             summary: Method to get current user's all cards
             operationId: getUsersCards
             parameters: 
@@ -108,7 +112,7 @@ paths:
     /cards/{card_id}:
         get:
             tags:
-            -Cards
+            - Cards
             summary: Method to get card by id 
             operationId: getCardById
             parameters: 
@@ -162,7 +166,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#components/schemas/Error'
+                                $ref: '#/components/schemas/Error'
     /cards/{card_id}/edit:    
         put:
             tags:
@@ -185,7 +189,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#components/schemas/CardDTO'
+                                $ref: '#/components/schemas/CardDTO'
                 "400":
                     description: Card with this id doesn't exist
                 default:
@@ -193,7 +197,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#components/schemas/Error'
+                                $ref: '#/components/schemas/Error'
     /cards/{card_id}/save:
         post:
             tags:
@@ -220,7 +224,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#components/schemas/Error'
+                                $ref: '#/components/schemas/Error'
     /cards/create:
         post:
             tags:
@@ -267,8 +271,7 @@ components:
                 type: string
                 example: password
             roles:
-                type: Roles
-                example: [BRO, ADMIN]
+                $ref: '#/components/schemas/Roles'
             url:
                 type: string
                 example: krasivyi-url
