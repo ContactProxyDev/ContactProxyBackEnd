@@ -72,7 +72,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error'
-    /cards/{user_id}:
+    /cards/all/{user_id}:
         get:
             tags:
             -Cards
@@ -96,7 +96,9 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Cards'
                 "204":
-                    description: Current users doesn't have any cards
+                    description: Current user doesn't have any cards
+                    content:
+                        application/json: {}
                 default:
                     description: When something went wrong
                     content: 
