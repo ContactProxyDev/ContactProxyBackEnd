@@ -1,8 +1,20 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		maven { url "https://repo1.maven.org/maven2" }
+	}
+	dependencies {
+		classpath "org.openapitools:openapi-generator-gradle-plugin:5.0.0"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 }
+
+apply plugin: 'org.openapi.generator'
 
 group = 'ru.nsu.contactproxy'
 version = '0.0.1-SNAPSHOT'
@@ -32,4 +44,16 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+openApiGenerate {
+	generatorName = "spring"
+	inputSpec = "$rootDir/src/main/resources/ContactProxy-ApiDef.yaml".toString()
+	outputDir = "$buildDir/generated".toString()
+	apiPackage = "ru.nsu.contactproxy.backend.api"
+	invokerPackage = "ru.nsu.contactproxy.backend.invoker"
+	modelPackage = "ru.nsu.contactproxy.backend.model"
+	configOptions = [
+			dateLibrary: "java8"
+	]
 }
