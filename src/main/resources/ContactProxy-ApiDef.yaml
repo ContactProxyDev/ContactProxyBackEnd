@@ -429,7 +429,7 @@ components:
     CardFields:
         type: array
         items: 
-            $ref: '#/components/schemas/CardFields'
+            $ref: '#/components/schemas/CardField'
     Role:
         required:
             - id
@@ -481,7 +481,7 @@ components:
     UserFields:
         type: array
         items: 
-            $ref: '#/components/schemas/UserFields'
+            $ref: '#/components/schemas/UserField'
     UserFieldType:
         required:
             - roleId
