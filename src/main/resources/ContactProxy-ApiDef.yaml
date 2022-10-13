@@ -9,7 +9,8 @@ servers:
     description: api server
 
 paths:
-    /autorize/login:
+    /authorize/login:
+
         post:
             tags:
             - Auth
@@ -62,10 +63,11 @@ paths:
             tags:
             - Auth
             summary: Method to refresh user's password
-            operationId: fordotPassword
+            operationId: forgotPassword
             responses:
                 "200":
-                    description: User succesfully refreshed password
+                    description: User successfully refreshed password
+
                     content:
                         application/json: {}
                 "400":
