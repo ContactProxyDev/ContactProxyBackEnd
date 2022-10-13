@@ -10,6 +10,7 @@ servers:
 
 paths:
     /authorize/login:
+
         post:
             tags:
             - Auth
@@ -66,6 +67,7 @@ paths:
             responses:
                 "200":
                     description: User successfully refreshed password
+
                     content:
                         application/json: {}
                 "400":
