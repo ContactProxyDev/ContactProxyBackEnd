@@ -1,20 +1,8 @@
-buildscript {
-	repositories {
-		mavenLocal()
-		maven { url "https://repo1.maven.org/maven2" }
-	}
-	dependencies {
-		classpath "org.openapitools:openapi-generator-gradle-plugin:5.0.0"
-	}
-}
-
 plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 }
-
-apply plugin: 'org.openapi.generator'
 
 group = 'ru.nsu.contactproxy'
 version = '0.0.1-SNAPSHOT'
@@ -34,26 +22,23 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
+	implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.3'
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
+	implementation group: 'org.openapitools', name: 'jackson-databind-nullable', version: '0.2.1'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.3'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-openApiGenerate {
-	generatorName = "spring"
-	inputSpec = "$rootDir/src/main/resources/ContactProxy-ApiDef.yaml".toString()
-	outputDir = "$buildDir/generated".toString()
-	apiPackage = "ru.nsu.contactproxy.backend.api"
-	invokerPackage = "ru.nsu.contactproxy.backend.invoker"
-	modelPackage = "ru.nsu.contactproxy.backend.model"
-	configOptions = [
-			dateLibrary: "java8"
-	]
 }
