@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.invoker;
+package ru.nsu.contactproxy.backend.util;
 
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 

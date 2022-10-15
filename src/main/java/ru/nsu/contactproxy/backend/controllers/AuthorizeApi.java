@@ -1,7 +1,8 @@
-package ru.nsu.contactproxy.backend.api;
+package ru.nsu.contactproxy.backend.controllers;
 
-import ru.nsu.contactproxy.backend.model.Error;
-import ru.nsu.contactproxy.backend.model.JWTResponse;
+import ru.nsu.contactproxy.backend.repositories.entities.JWTResponseEntity;
+import ru.nsu.contactproxy.backend.util.ApiUtil;
+import ru.nsu.contactproxy.backend.repositories.entities.ErrorEntity;
 import ru.nsu.contactproxy.backend.model.UserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,7 +23,7 @@ import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
 @Validated
-@Tag(name = "authorize", description = "the authorize API")
+@Tag(name = "Auth", description = "the authorization API")
 @RequestMapping("${openapi.contactProxy.base-path:/contact-proxy}")
 public interface AuthorizeApi {
 
@@ -31,21 +32,21 @@ public interface AuthorizeApi {
     }
 
     /**
-     * POST /authorize/forgotPassword : Method to refresh user&#39;s password
+     * POST /authorize/forgotPassword : Method to refresh user's password
      *
-     * @return User successfully refreshed password (status code 200)
+     * @return UserEntity successfully refreshed password (status code 200)
      *         or This password is already using (status code 400)
-     *         or When something went wrong (status code 200)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "forgotPassword",
         summary = "Method to refresh user's password",
         tags = { "Auth" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "User successfully refreshed password"),
+            @ApiResponse(responseCode = "200", description = "UserEntity successfully refreshed password"),
             @ApiResponse(responseCode = "400", description = "This password is already using"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -54,9 +55,7 @@ public interface AuthorizeApi {
         value = "/authorize/forgotPassword",
         produces = { "application/json" }
     )
-    default ResponseEntity<Void> forgotPassword(
-        
-    ) {
+    default ResponseEntity<Void> forgotPassword() {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -67,7 +66,7 @@ public interface AuthorizeApi {
      *
      * @return Successful log in (status code 200)
      *         or No such user found (status code 400)
-     *         or When something went wrong (status code 200)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "login",
@@ -75,11 +74,11 @@ public interface AuthorizeApi {
         tags = { "Auth" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful log in", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponseEntity.class))
             }),
             @ApiResponse(responseCode = "400", description = "No such user found"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -88,9 +87,7 @@ public interface AuthorizeApi {
         value = "/authorize/login",
         produces = { "application/json" }
     )
-    default ResponseEntity<JWTResponse> login(
-        
-    ) {
+    default ResponseEntity<JWTResponseEntity> login() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -111,7 +108,7 @@ public interface AuthorizeApi {
      * @param userDTO  (required)
      * @return Successful register (status code 200)
      *         or This email has already been registered (status code 400)
-     *         or When something went wrong (status code 200)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "register",
@@ -119,11 +116,11 @@ public interface AuthorizeApi {
         tags = { "Auth" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful register", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponseEntity.class))
             }),
             @ApiResponse(responseCode = "400", description = "This email has already been registered"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -133,7 +130,7 @@ public interface AuthorizeApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<JWTResponse> register(
+    default ResponseEntity<JWTResponseEntity> register(
         @Parameter(name = "UserDTO", description = "", required = true) @Valid @RequestBody UserDTO userDTO
     ) {
         getRequest().ifPresent(request -> {

@@ -1,25 +1,20 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * UserField
+ * UserFieldEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class UserField {
+public class UserFieldEntity {
 
   @JsonProperty("userId")
   private Integer userId;
@@ -30,7 +25,7 @@ public class UserField {
   @JsonProperty("fieldData")
   private String fieldData;
 
-  public UserField userId(Integer userId) {
+  public UserFieldEntity userId(Integer userId) {
     this.userId = userId;
     return this;
   }
@@ -49,7 +44,7 @@ public class UserField {
     this.userId = userId;
   }
 
-  public UserField userFieldId(Integer userFieldId) {
+  public UserFieldEntity userFieldId(Integer userFieldId) {
     this.userFieldId = userFieldId;
     return this;
   }
@@ -68,7 +63,7 @@ public class UserField {
     this.userFieldId = userFieldId;
   }
 
-  public UserField fieldData(String fieldData) {
+  public UserFieldEntity fieldData(String fieldData) {
     this.fieldData = fieldData;
     return this;
   }
@@ -95,10 +90,10 @@ public class UserField {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserField userField = (UserField) o;
-    return Objects.equals(this.userId, userField.userId) &&
-        Objects.equals(this.userFieldId, userField.userFieldId) &&
-        Objects.equals(this.fieldData, userField.fieldData);
+    UserFieldEntity userFieldEntity = (UserFieldEntity) o;
+    return Objects.equals(this.userId, userFieldEntity.userId) &&
+        Objects.equals(this.userFieldId, userFieldEntity.userFieldId) &&
+        Objects.equals(this.fieldData, userFieldEntity.fieldData);
   }
 
   @Override
@@ -109,7 +104,7 @@ public class UserField {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserField {\n");
+    sb.append("class UserFieldEntity {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    userFieldId: ").append(toIndentedString(userFieldId)).append("\n");
     sb.append("    fieldData: ").append(toIndentedString(fieldData)).append("\n");

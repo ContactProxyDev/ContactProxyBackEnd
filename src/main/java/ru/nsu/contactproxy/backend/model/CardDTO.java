@@ -1,22 +1,19 @@
 package ru.nsu.contactproxy.backend.model;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.nsu.contactproxy.backend.model.CardField;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
+import ru.nsu.contactproxy.backend.repositories.entities.CardFieldEntity;
+
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -58,9 +55,9 @@ public class CardDTO {
   @JsonProperty("isDeleted")
   private Boolean isDeleted;
 
-  @JsonProperty("cardFields")
+  @JsonProperty("cardFieldEntities")
   @Valid
-  private List<CardField> cardFields = new ArrayList<>();
+  private List<CardFieldEntity> cardFieldEntities = new ArrayList<>();
 
   public CardDTO name(String name) {
     this.name = name;
@@ -252,28 +249,28 @@ public class CardDTO {
     this.isDeleted = isDeleted;
   }
 
-  public CardDTO cardFields(List<CardField> cardFields) {
-    this.cardFields = cardFields;
+  public CardDTO cardFields(List<CardFieldEntity> cardFieldEntities) {
+    this.cardFieldEntities = cardFieldEntities;
     return this;
   }
 
-  public CardDTO addCardFieldsItem(CardField cardFieldsItem) {
-    this.cardFields.add(cardFieldsItem);
+  public CardDTO addCardFieldsItem(CardFieldEntity cardFieldsItemEntity) {
+    this.cardFieldEntities.add(cardFieldsItemEntity);
     return this;
   }
 
   /**
-   * Get cardFields
-   * @return cardFields
+   * Get cardFieldEntities
+   * @return cardFieldEntities
   */
   @NotNull @Valid 
-  @Schema(name = "cardFields", required = true)
-  public List<CardField> getCardFields() {
-    return cardFields;
+  @Schema(name = "cardFieldEntities", required = true)
+  public List<CardFieldEntity> getCardFields() {
+    return cardFieldEntities;
   }
 
-  public void setCardFields(List<CardField> cardFields) {
-    this.cardFields = cardFields;
+  public void setCardFields(List<CardFieldEntity> cardFieldEntities) {
+    this.cardFieldEntities = cardFieldEntities;
   }
 
   @Override
@@ -295,12 +292,12 @@ public class CardDTO {
         Objects.equals(this.isOnlyForAuthorizedUsers, cardDTO.isOnlyForAuthorizedUsers) &&
         Objects.equals(this.isOnlyWithPermission, cardDTO.isOnlyWithPermission) &&
         Objects.equals(this.isDeleted, cardDTO.isDeleted) &&
-        Objects.equals(this.cardFields, cardDTO.cardFields);
+        Objects.equals(this.cardFieldEntities, cardDTO.cardFieldEntities);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted, cardFields);
+    return Objects.hash(name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted, cardFieldEntities);
   }
 
   @Override
@@ -317,7 +314,7 @@ public class CardDTO {
     sb.append("    isOnlyForAuthorizedUsers: ").append(toIndentedString(isOnlyForAuthorizedUsers)).append("\n");
     sb.append("    isOnlyWithPermission: ").append(toIndentedString(isOnlyWithPermission)).append("\n");
     sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
-    sb.append("    cardFields: ").append(toIndentedString(cardFields)).append("\n");
+    sb.append("    cardFieldEntities: ").append(toIndentedString(cardFieldEntities)).append("\n");
     sb.append("}");
     return sb.toString();
   }

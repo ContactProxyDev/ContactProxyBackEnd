@@ -1,27 +1,24 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
+
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * Card
+ * CardEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class Card {
+public class CardEntity {
 
   @JsonProperty("id")
   private Integer id;
@@ -61,7 +58,7 @@ public class Card {
   @JsonProperty("isDeleted")
   private Boolean isDeleted;
 
-  public Card id(Integer id) {
+  public CardEntity id(Integer id) {
     this.id = id;
     return this;
   }
@@ -80,7 +77,7 @@ public class Card {
     this.id = id;
   }
 
-  public Card ownerId(Integer ownerId) {
+  public CardEntity ownerId(Integer ownerId) {
     this.ownerId = ownerId;
     return this;
   }
@@ -99,7 +96,7 @@ public class Card {
     this.ownerId = ownerId;
   }
 
-  public Card name(String name) {
+  public CardEntity name(String name) {
     this.name = name;
     return this;
   }
@@ -118,7 +115,7 @@ public class Card {
     this.name = name;
   }
 
-  public Card creationDate(OffsetDateTime creationDate) {
+  public CardEntity creationDate(OffsetDateTime creationDate) {
     this.creationDate = creationDate;
     return this;
   }
@@ -137,7 +134,7 @@ public class Card {
     this.creationDate = creationDate;
   }
 
-  public Card viewCounter(Integer viewCounter) {
+  public CardEntity viewCounter(Integer viewCounter) {
     this.viewCounter = viewCounter;
     return this;
   }
@@ -156,7 +153,7 @@ public class Card {
     this.viewCounter = viewCounter;
   }
 
-  public Card maxViewCount(Integer maxViewCount) {
+  public CardEntity maxViewCount(Integer maxViewCount) {
     this.maxViewCount = maxViewCount;
     return this;
   }
@@ -175,7 +172,7 @@ public class Card {
     this.maxViewCount = maxViewCount;
   }
 
-  public Card maxViewDate(OffsetDateTime maxViewDate) {
+  public CardEntity maxViewDate(OffsetDateTime maxViewDate) {
     this.maxViewDate = maxViewDate;
     return this;
   }
@@ -194,7 +191,7 @@ public class Card {
     this.maxViewDate = maxViewDate;
   }
 
-  public Card url(String url) {
+  public CardEntity url(String url) {
     this.url = url;
     return this;
   }
@@ -213,7 +210,7 @@ public class Card {
     this.url = url;
   }
 
-  public Card isVisible(Boolean isVisible) {
+  public CardEntity isVisible(Boolean isVisible) {
     this.isVisible = isVisible;
     return this;
   }
@@ -232,7 +229,7 @@ public class Card {
     this.isVisible = isVisible;
   }
 
-  public Card isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
+  public CardEntity isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
     return this;
   }
@@ -251,7 +248,7 @@ public class Card {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
   }
 
-  public Card isOnlyWithPermission(Boolean isOnlyWithPermission) {
+  public CardEntity isOnlyWithPermission(Boolean isOnlyWithPermission) {
     this.isOnlyWithPermission = isOnlyWithPermission;
     return this;
   }
@@ -270,7 +267,7 @@ public class Card {
     this.isOnlyWithPermission = isOnlyWithPermission;
   }
 
-  public Card isDeleted(Boolean isDeleted) {
+  public CardEntity isDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
     return this;
   }
@@ -297,19 +294,19 @@ public class Card {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Card card = (Card) o;
-    return Objects.equals(this.id, card.id) &&
-        Objects.equals(this.ownerId, card.ownerId) &&
-        Objects.equals(this.name, card.name) &&
-        Objects.equals(this.creationDate, card.creationDate) &&
-        Objects.equals(this.viewCounter, card.viewCounter) &&
-        Objects.equals(this.maxViewCount, card.maxViewCount) &&
-        Objects.equals(this.maxViewDate, card.maxViewDate) &&
-        Objects.equals(this.url, card.url) &&
-        Objects.equals(this.isVisible, card.isVisible) &&
-        Objects.equals(this.isOnlyForAuthorizedUsers, card.isOnlyForAuthorizedUsers) &&
-        Objects.equals(this.isOnlyWithPermission, card.isOnlyWithPermission) &&
-        Objects.equals(this.isDeleted, card.isDeleted);
+    CardEntity cardEntity = (CardEntity) o;
+    return Objects.equals(this.id, cardEntity.id) &&
+        Objects.equals(this.ownerId, cardEntity.ownerId) &&
+        Objects.equals(this.name, cardEntity.name) &&
+        Objects.equals(this.creationDate, cardEntity.creationDate) &&
+        Objects.equals(this.viewCounter, cardEntity.viewCounter) &&
+        Objects.equals(this.maxViewCount, cardEntity.maxViewCount) &&
+        Objects.equals(this.maxViewDate, cardEntity.maxViewDate) &&
+        Objects.equals(this.url, cardEntity.url) &&
+        Objects.equals(this.isVisible, cardEntity.isVisible) &&
+        Objects.equals(this.isOnlyForAuthorizedUsers, cardEntity.isOnlyForAuthorizedUsers) &&
+        Objects.equals(this.isOnlyWithPermission, cardEntity.isOnlyWithPermission) &&
+        Objects.equals(this.isDeleted, cardEntity.isDeleted);
   }
 
   @Override
@@ -320,7 +317,7 @@ public class Card {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Card {\n");
+    sb.append("class CardEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

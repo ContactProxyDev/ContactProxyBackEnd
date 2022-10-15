@@ -1,8 +1,9 @@
-package ru.nsu.contactproxy.backend.api;
+package ru.nsu.contactproxy.backend.controllers;
 
-import ru.nsu.contactproxy.backend.model.Card;
+import ru.nsu.contactproxy.backend.repositories.entities.CardEntity;
+import ru.nsu.contactproxy.backend.repositories.entities.ErrorEntity;
+import ru.nsu.contactproxy.backend.util.ApiUtil;
 import ru.nsu.contactproxy.backend.model.CardDTO;
-import ru.nsu.contactproxy.backend.model.Error;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +24,7 @@ import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
 @Validated
-@Tag(name = "cards", description = "the cards API")
+@Tag(name = "Cards", description = "the cards API")
 @RequestMapping("${openapi.contactProxy.base-path:/contact-proxy}")
 public interface CardsApi {
 
@@ -36,7 +37,7 @@ public interface CardsApi {
      *
      * @param cardDTO  (required)
      * @return Successful card creation (status code 200)
-     *         or When something goes wrong (status code 200)
+     *         or When something goes wrong (status code 500)
      */
     @Operation(
         operationId = "createCard",
@@ -46,8 +47,8 @@ public interface CardsApi {
             @ApiResponse(responseCode = "200", description = "Successful card creation", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CardDTO.class))
             }),
-            @ApiResponse(responseCode = "200", description = "When something goes wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something goes wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -77,9 +78,9 @@ public interface CardsApi {
     /**
      * DELETE /cards/{card_id}/delete : Method to delete card
      *
-     * @param cardId Card id (required)
+     * @param cardId CardEntity id (required)
      * @return Successful delete (status code 200)
-     *         or When something went wrong (status code 200)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "deleteById",
@@ -87,8 +88,8 @@ public interface CardsApi {
         tags = { "Cards" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful delete"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -98,7 +99,7 @@ public interface CardsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<Void> deleteById(
-        @Parameter(name = "card_id", description = "Card id", required = true) @PathVariable("card_id") Integer cardId
+        @Parameter(name = "card_id", description = "CardEntity id", required = true) @PathVariable("card_id") Integer cardId
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -108,10 +109,10 @@ public interface CardsApi {
     /**
      * PUT /cards/{card_id}/edit : Method to edit card
      *
-     * @param cardId Card id (required)
+     * @param cardId CardEntity id (required)
      * @return Successful editing card (status code 200)
-     *         or Card with this id doesn&#39;t exist (status code 400)
-     *         or When something went wrong (status code 200)
+     *         or CardEntity with this id doesn't exist (status code 400)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "editById",
@@ -121,9 +122,9 @@ public interface CardsApi {
             @ApiResponse(responseCode = "200", description = "Successful editing card", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CardDTO.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Card with this id doesn't exist"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "400", description = "CardEntity with this id doesn't exist"),
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -133,7 +134,7 @@ public interface CardsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<CardDTO> editById(
-        @Parameter(name = "card_id", description = "Card id", required = true) @PathVariable("card_id") Integer cardId
+        @Parameter(name = "card_id", description = "CardEntity id", required = true) @PathVariable("card_id") Integer cardId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -152,10 +153,10 @@ public interface CardsApi {
     /**
      * GET /cards/{card_id} : Method to get card by id
      *
-     * @param cardId Card ID (required)
+     * @param cardId CardEntity ID (required)
      * @return Successful response with users all cards (status code 200)
-     *         or Card with this id doesn&#39;t exist (status code 400)
-     *         or When something went wrong (status code 200)
+     *         or CardEntity with this id doesn't exist (status code 400)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "getCardById",
@@ -165,9 +166,9 @@ public interface CardsApi {
             @ApiResponse(responseCode = "200", description = "Successful response with users all cards", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CardDTO.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Card with this id doesn't exist"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "400", description = "CardEntity with this id doesn't exist"),
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -177,7 +178,7 @@ public interface CardsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<CardDTO> getCardById(
-        @Parameter(name = "card_id", description = "Card ID", required = true) @PathVariable("card_id") Integer cardId
+        @Parameter(name = "card_id", description = "CardEntity ID", required = true) @PathVariable("card_id") Integer cardId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -194,12 +195,12 @@ public interface CardsApi {
 
 
     /**
-     * GET /cards/all/{user_id} : Method to get current user&#39;s all cards
+     * GET /cards/all/{user_id} : Method to get current user's all cards
      *
-     * @param userId User ID (required)
+     * @param userId UserEntity ID (required)
      * @return Successful response with users all cards (status code 200)
-     *         or Current user doesn&#39;t have any cards (status code 204)
-     *         or When something went wrong (status code 200)
+     *         or Current user doesn't have any cards (status code 204)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "getUsersCards",
@@ -207,11 +208,11 @@ public interface CardsApi {
         tags = { "Cards" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response with users all cards", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Card.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CardEntity.class))
             }),
             @ApiResponse(responseCode = "204", description = "Current user doesn't have any cards"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -220,8 +221,8 @@ public interface CardsApi {
         value = "/cards/all/{user_id}",
         produces = { "application/json" }
     )
-    default ResponseEntity<List<Card>> getUsersCards(
-        @Parameter(name = "user_id", description = "User ID", required = true) @PathVariable("user_id") Integer userId
+    default ResponseEntity<List<CardEntity>> getUsersCards(
+        @Parameter(name = "user_id", description = "UserEntity ID", required = true) @PathVariable("user_id") Integer userId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -240,9 +241,9 @@ public interface CardsApi {
     /**
      * POST /cards/{card_id}/save : Method to save card
      *
-     * @param cardId Card id (required)
+     * @param cardId CardEntity id (required)
      * @return Successful save (status code 200)
-     *         or When something went wrong (status code 200)
+     *         or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "saveById",
@@ -250,8 +251,8 @@ public interface CardsApi {
         tags = { "Cards" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful save"),
-            @ApiResponse(responseCode = "200", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+            @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
             })
         }
     )
@@ -261,7 +262,7 @@ public interface CardsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<Void> saveById(
-        @Parameter(name = "card_id", description = "Card id", required = true) @PathVariable("card_id") Integer cardId
+        @Parameter(name = "card_id", description = "CardEntity id", required = true) @PathVariable("card_id") Integer cardId
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 

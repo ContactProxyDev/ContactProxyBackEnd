@@ -1,25 +1,20 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * RequestState
+ * RequestStateEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class RequestState {
+public class RequestStateEntity {
 
   @JsonProperty("id")
   private Integer id;
@@ -27,7 +22,7 @@ public class RequestState {
   @JsonProperty("stateName")
   private String stateName;
 
-  public RequestState id(Integer id) {
+  public RequestStateEntity id(Integer id) {
     this.id = id;
     return this;
   }
@@ -46,7 +41,7 @@ public class RequestState {
     this.id = id;
   }
 
-  public RequestState stateName(String stateName) {
+  public RequestStateEntity stateName(String stateName) {
     this.stateName = stateName;
     return this;
   }
@@ -73,9 +68,9 @@ public class RequestState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RequestState requestState = (RequestState) o;
-    return Objects.equals(this.id, requestState.id) &&
-        Objects.equals(this.stateName, requestState.stateName);
+    RequestStateEntity requestStateEntity = (RequestStateEntity) o;
+    return Objects.equals(this.id, requestStateEntity.id) &&
+        Objects.equals(this.stateName, requestStateEntity.stateName);
   }
 
   @Override
@@ -86,7 +81,7 @@ public class RequestState {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestState {\n");
+    sb.append("class RequestStateEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    stateName: ").append(toIndentedString(stateName)).append("\n");
     sb.append("}");

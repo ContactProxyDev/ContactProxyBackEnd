@@ -1,25 +1,20 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * CardViewRecord
+ * CardViewRecordEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardViewRecord {
+public class CardViewRecordEntity {
 
   @JsonProperty("userId")
   private Integer userId;
@@ -27,7 +22,7 @@ public class CardViewRecord {
   @JsonProperty("cardId")
   private Integer cardId;
 
-  public CardViewRecord userId(Integer userId) {
+  public CardViewRecordEntity userId(Integer userId) {
     this.userId = userId;
     return this;
   }
@@ -46,7 +41,7 @@ public class CardViewRecord {
     this.userId = userId;
   }
 
-  public CardViewRecord cardId(Integer cardId) {
+  public CardViewRecordEntity cardId(Integer cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -73,9 +68,9 @@ public class CardViewRecord {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardViewRecord cardViewRecord = (CardViewRecord) o;
-    return Objects.equals(this.userId, cardViewRecord.userId) &&
-        Objects.equals(this.cardId, cardViewRecord.cardId);
+    CardViewRecordEntity cardViewRecordEntity = (CardViewRecordEntity) o;
+    return Objects.equals(this.userId, cardViewRecordEntity.userId) &&
+        Objects.equals(this.cardId, cardViewRecordEntity.cardId);
   }
 
   @Override
@@ -86,7 +81,7 @@ public class CardViewRecord {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardViewRecord {\n");
+    sb.append("class CardViewRecordEntity {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");
