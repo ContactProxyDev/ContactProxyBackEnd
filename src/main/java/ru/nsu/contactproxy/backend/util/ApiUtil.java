@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.api;
+package ru.nsu.contactproxy.backend.util;
 
 import org.springframework.web.context.request.NativeWebRequest;
 

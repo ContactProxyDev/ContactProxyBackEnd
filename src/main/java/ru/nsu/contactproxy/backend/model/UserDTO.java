@@ -1,21 +1,18 @@
 package ru.nsu.contactproxy.backend.model;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.util.ArrayList;
 import java.util.List;
-import ru.nsu.contactproxy.backend.model.Role;
-import ru.nsu.contactproxy.backend.model.UserField;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
+import ru.nsu.contactproxy.backend.repositories.entities.RoleEntity;
+import ru.nsu.contactproxy.backend.repositories.entities.UserFieldEntity;
+
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -34,13 +31,13 @@ public class UserDTO {
   @JsonProperty("password")
   private String password;
 
-  @JsonProperty("roles")
+  @JsonProperty("roleEntities")
   @Valid
-  private List<Role> roles = new ArrayList<>();
+  private List<RoleEntity> roleEntities = new ArrayList<>();
 
-  @JsonProperty("userFields")
+  @JsonProperty("userFieldEntities")
   @Valid
-  private List<UserField> userFields = new ArrayList<>();
+  private List<UserFieldEntity> userFieldEntities = new ArrayList<>();
 
   @JsonProperty("url")
   private String url;
@@ -102,52 +99,52 @@ public class UserDTO {
     this.password = password;
   }
 
-  public UserDTO roles(List<Role> roles) {
-    this.roles = roles;
+  public UserDTO roles(List<RoleEntity> roleEntities) {
+    this.roleEntities = roleEntities;
     return this;
   }
 
-  public UserDTO addRolesItem(Role rolesItem) {
-    this.roles.add(rolesItem);
-    return this;
-  }
-
-  /**
-   * Get roles
-   * @return roles
-  */
-  @NotNull @Valid 
-  @Schema(name = "roles", required = true)
-  public List<Role> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
-  }
-
-  public UserDTO userFields(List<UserField> userFields) {
-    this.userFields = userFields;
-    return this;
-  }
-
-  public UserDTO addUserFieldsItem(UserField userFieldsItem) {
-    this.userFields.add(userFieldsItem);
+  public UserDTO addRolesItem(RoleEntity rolesItem) {
+    this.roleEntities.add(rolesItem);
     return this;
   }
 
   /**
-   * Get userFields
-   * @return userFields
+   * Get roleEntities
+   * @return roleEntities
   */
   @NotNull @Valid 
-  @Schema(name = "userFields", required = true)
-  public List<UserField> getUserFields() {
-    return userFields;
+  @Schema(name = "roleEntities", required = true)
+  public List<RoleEntity> getRoles() {
+    return roleEntities;
   }
 
-  public void setUserFields(List<UserField> userFields) {
-    this.userFields = userFields;
+  public void setRoles(List<RoleEntity> roleEntities) {
+    this.roleEntities = roleEntities;
+  }
+
+  public UserDTO userFields(List<UserFieldEntity> userFieldEntities) {
+    this.userFieldEntities = userFieldEntities;
+    return this;
+  }
+
+  public UserDTO addUserFieldsItem(UserFieldEntity userFieldsItemEntity) {
+    this.userFieldEntities.add(userFieldsItemEntity);
+    return this;
+  }
+
+  /**
+   * Get userFieldEntities
+   * @return userFieldEntities
+  */
+  @NotNull @Valid 
+  @Schema(name = "userFieldEntities", required = true)
+  public List<UserFieldEntity> getUserFields() {
+    return userFieldEntities;
+  }
+
+  public void setUserFields(List<UserFieldEntity> userFieldEntities) {
+    this.userFieldEntities = userFieldEntities;
   }
 
   public UserDTO url(String url) {
@@ -181,14 +178,14 @@ public class UserDTO {
     return Objects.equals(this.id, userDTO.id) &&
         Objects.equals(this.email, userDTO.email) &&
         Objects.equals(this.password, userDTO.password) &&
-        Objects.equals(this.roles, userDTO.roles) &&
-        Objects.equals(this.userFields, userDTO.userFields) &&
+        Objects.equals(this.roleEntities, userDTO.roleEntities) &&
+        Objects.equals(this.userFieldEntities, userDTO.userFieldEntities) &&
         Objects.equals(this.url, userDTO.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, password, roles, userFields, url);
+    return Objects.hash(id, email, password, roleEntities, userFieldEntities, url);
   }
 
   @Override
@@ -198,8 +195,8 @@ public class UserDTO {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
-    sb.append("    userFields: ").append(toIndentedString(userFields)).append("\n");
+    sb.append("    roleEntities: ").append(toIndentedString(roleEntities)).append("\n");
+    sb.append("    userFieldEntities: ").append(toIndentedString(userFieldEntities)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();

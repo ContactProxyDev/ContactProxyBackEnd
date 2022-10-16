@@ -1,25 +1,18 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * JWTResponse
+ * JWTResponseEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class JWTResponse {
+public class JWTResponseEntity {
 
   @JsonProperty("userId")
   private Integer userId;
@@ -27,7 +20,7 @@ public class JWTResponse {
   @JsonProperty("jwt")
   private String jwt;
 
-  public JWTResponse userId(Integer userId) {
+  public JWTResponseEntity userId(Integer userId) {
     this.userId = userId;
     return this;
   }
@@ -46,7 +39,7 @@ public class JWTResponse {
     this.userId = userId;
   }
 
-  public JWTResponse jwt(String jwt) {
+  public JWTResponseEntity jwt(String jwt) {
     this.jwt = jwt;
     return this;
   }
@@ -73,7 +66,7 @@ public class JWTResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    JWTResponse jwTResponse = (JWTResponse) o;
+    JWTResponseEntity jwTResponse = (JWTResponseEntity) o;
     return Objects.equals(this.userId, jwTResponse.userId) &&
         Objects.equals(this.jwt, jwTResponse.jwt);
   }
@@ -86,7 +79,7 @@ public class JWTResponse {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class JWTResponse {\n");
+    sb.append("class JWTResponseEntity {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    jwt: ").append(toIndentedString(jwt)).append("\n");
     sb.append("}");

@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.configuration;
+package ru.nsu.contactproxy.backend.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Home redirection to OpenAPI api documentation
  */
 @Controller
-public class HomeController {
+public class SwaggerPageController {
 
     @RequestMapping("/")
     public String index() {

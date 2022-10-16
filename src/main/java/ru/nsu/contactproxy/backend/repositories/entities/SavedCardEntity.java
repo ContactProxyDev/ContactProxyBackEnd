@@ -1,25 +1,20 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * SavedCard
+ * SavedCardEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class SavedCard {
+public class SavedCardEntity {
 
   @JsonProperty("ownerId")
   private Integer ownerId;
@@ -27,7 +22,7 @@ public class SavedCard {
   @JsonProperty("cardId")
   private Integer cardId;
 
-  public SavedCard ownerId(Integer ownerId) {
+  public SavedCardEntity ownerId(Integer ownerId) {
     this.ownerId = ownerId;
     return this;
   }
@@ -46,7 +41,7 @@ public class SavedCard {
     this.ownerId = ownerId;
   }
 
-  public SavedCard cardId(Integer cardId) {
+  public SavedCardEntity cardId(Integer cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -73,9 +68,9 @@ public class SavedCard {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SavedCard savedCard = (SavedCard) o;
-    return Objects.equals(this.ownerId, savedCard.ownerId) &&
-        Objects.equals(this.cardId, savedCard.cardId);
+    SavedCardEntity savedCardEntity = (SavedCardEntity) o;
+    return Objects.equals(this.ownerId, savedCardEntity.ownerId) &&
+        Objects.equals(this.cardId, savedCardEntity.cardId);
   }
 
   @Override
@@ -86,7 +81,7 @@ public class SavedCard {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SavedCard {\n");
+    sb.append("class SavedCardEntity {\n");
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");

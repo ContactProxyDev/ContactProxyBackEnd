@@ -1,25 +1,20 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * Role
+ * RoleEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class Role {
+public class RoleEntity {
 
   @JsonProperty("id")
   private Integer id;
@@ -27,7 +22,7 @@ public class Role {
   @JsonProperty("name")
   private String name;
 
-  public Role id(Integer id) {
+  public RoleEntity id(Integer id) {
     this.id = id;
     return this;
   }
@@ -46,7 +41,7 @@ public class Role {
     this.id = id;
   }
 
-  public Role name(String name) {
+  public RoleEntity name(String name) {
     this.name = name;
     return this;
   }
@@ -73,9 +68,9 @@ public class Role {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Role role = (Role) o;
-    return Objects.equals(this.id, role.id) &&
-        Objects.equals(this.name, role.name);
+    RoleEntity roleEntity = (RoleEntity) o;
+    return Objects.equals(this.id, roleEntity.id) &&
+        Objects.equals(this.name, roleEntity.name);
   }
 
   @Override
@@ -86,7 +81,7 @@ public class Role {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Role {\n");
+    sb.append("class RoleEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");

@@ -1,6 +1,4 @@
-package ru.nsu.contactproxy.backend.api;
-
-
+package ru.nsu.contactproxy.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,15 +7,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen",
-        date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
 @Controller
-public class CardsApiController implements CardsApi {
+public class AuthorizationController implements AuthorizeApi {
 
     private final NativeWebRequest request;
 
     @Autowired
-    public CardsApiController(NativeWebRequest request) {
+    public AuthorizationController(NativeWebRequest request) {
         this.request = request;
     }
 

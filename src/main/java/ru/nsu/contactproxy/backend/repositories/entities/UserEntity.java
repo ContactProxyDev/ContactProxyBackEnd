@@ -1,28 +1,23 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.util.ArrayList;
 import java.util.List;
-import ru.nsu.contactproxy.backend.model.Role;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * User
+ * UserEntity
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class User {
+public class UserEntity {
 
   @JsonProperty("id")
   private Integer id;
@@ -33,14 +28,14 @@ public class User {
   @JsonProperty("password")
   private String password;
 
-  @JsonProperty("roles")
+  @JsonProperty("roleEntities")
   @Valid
-  private List<Role> roles = new ArrayList<>();
+  private List<RoleEntity> roleEntities = new ArrayList<>();
 
   @JsonProperty("url")
   private String url;
 
-  public User id(Integer id) {
+  public UserEntity id(Integer id) {
     this.id = id;
     return this;
   }
@@ -59,7 +54,7 @@ public class User {
     this.id = id;
   }
 
-  public User email(String email) {
+  public UserEntity email(String email) {
     this.email = email;
     return this;
   }
@@ -78,7 +73,7 @@ public class User {
     this.email = email;
   }
 
-  public User password(String password) {
+  public UserEntity password(String password) {
     this.password = password;
     return this;
   }
@@ -97,31 +92,31 @@ public class User {
     this.password = password;
   }
 
-  public User roles(List<Role> roles) {
-    this.roles = roles;
+  public UserEntity roles(List<RoleEntity> roleEntities) {
+    this.roleEntities = roleEntities;
     return this;
   }
 
-  public User addRolesItem(Role rolesItem) {
-    this.roles.add(rolesItem);
+  public UserEntity addRolesItem(RoleEntity rolesItem) {
+    this.roleEntities.add(rolesItem);
     return this;
   }
 
   /**
-   * Get roles
-   * @return roles
+   * Get roleEntities
+   * @return roleEntities
   */
   @NotNull @Valid 
-  @Schema(name = "roles", required = true)
-  public List<Role> getRoles() {
-    return roles;
+  @Schema(name = "roleEntities", required = true)
+  public List<RoleEntity> getRoles() {
+    return roleEntities;
   }
 
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
+  public void setRoles(List<RoleEntity> roleEntities) {
+    this.roleEntities = roleEntities;
   }
 
-  public User url(String url) {
+  public UserEntity url(String url) {
     this.url = url;
     return this;
   }
@@ -148,27 +143,27 @@ public class User {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.email, user.email) &&
-        Objects.equals(this.password, user.password) &&
-        Objects.equals(this.roles, user.roles) &&
-        Objects.equals(this.url, user.url);
+    UserEntity userEntity = (UserEntity) o;
+    return Objects.equals(this.id, userEntity.id) &&
+        Objects.equals(this.email, userEntity.email) &&
+        Objects.equals(this.password, userEntity.password) &&
+        Objects.equals(this.roleEntities, userEntity.roleEntities) &&
+        Objects.equals(this.url, userEntity.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, password, roles, url);
+    return Objects.hash(id, email, password, roleEntities, url);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class User {\n");
+    sb.append("class UserEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
+    sb.append("    roleEntities: ").append(toIndentedString(roleEntities)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
