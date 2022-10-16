@@ -17,12 +17,12 @@ import javax.annotation.Generated;
 public class RoleEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("name")
   private String name;
 
-  public RoleEntity id(Integer id) {
+  public RoleEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -33,11 +33,11 @@ public class RoleEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "123", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

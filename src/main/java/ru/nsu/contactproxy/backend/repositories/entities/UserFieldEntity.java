@@ -17,15 +17,15 @@ import javax.annotation.Generated;
 public class UserFieldEntity {
 
   @JsonProperty("userId")
-  private Integer userId;
+  private Long userId;
 
   @JsonProperty("userFieldId")
-  private Integer userFieldId;
+  private Long userFieldId;
 
   @JsonProperty("fieldData")
   private String fieldData;
 
-  public UserFieldEntity userId(Integer userId) {
+  public UserFieldEntity userId(Long userId) {
     this.userId = userId;
     return this;
   }
@@ -36,15 +36,15 @@ public class UserFieldEntity {
   */
   @NotNull 
   @Schema(name = "userId", example = "123", required = true)
-  public Integer getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
-  public UserFieldEntity userFieldId(Integer userFieldId) {
+  public UserFieldEntity userFieldId(Long userFieldId) {
     this.userFieldId = userFieldId;
     return this;
   }
@@ -55,11 +55,11 @@ public class UserFieldEntity {
   */
   @NotNull 
   @Schema(name = "userFieldId", example = "123", required = true)
-  public Integer getUserFieldId() {
+  public Long getUserFieldId() {
     return userFieldId;
   }
 
-  public void setUserFieldId(Integer userFieldId) {
+  public void setUserFieldId(Long userFieldId) {
     this.userFieldId = userFieldId;
   }
 

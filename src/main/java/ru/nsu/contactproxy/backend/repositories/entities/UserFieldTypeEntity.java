@@ -17,7 +17,7 @@ import javax.annotation.Generated;
 public class UserFieldTypeEntity {
 
   @JsonProperty("roleId")
-  private Integer roleId;
+  private Long roleId;
 
   @JsonProperty("fieldName")
   private String fieldName;
@@ -31,7 +31,7 @@ public class UserFieldTypeEntity {
   @JsonProperty("template")
   private String template;
 
-  public UserFieldTypeEntity roleId(Integer roleId) {
+  public UserFieldTypeEntity roleId(Long roleId) {
     this.roleId = roleId;
     return this;
   }
@@ -42,11 +42,11 @@ public class UserFieldTypeEntity {
   */
   @NotNull 
   @Schema(name = "roleId", example = "123", required = true)
-  public Integer getRoleId() {
+  public Long getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Integer roleId) {
+  public void setRoleId(Long roleId) {
     this.roleId = roleId;
   }
 

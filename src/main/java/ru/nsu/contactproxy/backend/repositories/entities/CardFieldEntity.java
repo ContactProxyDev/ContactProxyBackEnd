@@ -17,10 +17,10 @@ import javax.annotation.Generated;
 public class CardFieldEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("cardId")
-  private Integer cardId;
+  private Long cardId;
 
   @JsonProperty("fieldName")
   private String fieldName;
@@ -31,7 +31,7 @@ public class CardFieldEntity {
   @JsonProperty("cardFieldTypeId")
   private String cardFieldTypeId;
 
-  public CardFieldEntity id(Integer id) {
+  public CardFieldEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -42,15 +42,15 @@ public class CardFieldEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "12", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public CardFieldEntity cardId(Integer cardId) {
+  public CardFieldEntity cardId(Long cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -61,11 +61,11 @@ public class CardFieldEntity {
   */
   @NotNull 
   @Schema(name = "cardId", example = "12", required = true)
-  public Integer getCardId() {
+  public Long getCardId() {
     return cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 

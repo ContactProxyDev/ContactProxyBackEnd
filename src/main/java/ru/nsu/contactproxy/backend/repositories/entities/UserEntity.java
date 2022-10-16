@@ -20,7 +20,7 @@ import javax.annotation.Generated;
 public class UserEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("email")
   private String email;
@@ -35,7 +35,7 @@ public class UserEntity {
   @JsonProperty("url")
   private String url;
 
-  public UserEntity id(Integer id) {
+  public UserEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -46,11 +46,11 @@ public class UserEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "123", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -17,12 +17,12 @@ import javax.annotation.Generated;
 public class RequestStateEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("stateName")
   private String stateName;
 
-  public RequestStateEntity id(Integer id) {
+  public RequestStateEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -33,11 +33,11 @@ public class RequestStateEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "12435", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -21,13 +21,13 @@ import javax.annotation.Generated;
 public class PermissionRequestEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("requestingUserId")
-  private Integer requestingUserId;
+  private Long requestingUserId;
 
   @JsonProperty("requestedCardId")
-  private Integer requestedCardId;
+  private Long requestedCardId;
 
   @JsonProperty("requestState")
   private String requestState;
@@ -36,7 +36,7 @@ public class PermissionRequestEntity {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime requestDate;
 
-  public PermissionRequestEntity id(Integer id) {
+  public PermissionRequestEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -47,15 +47,15 @@ public class PermissionRequestEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "1234", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public PermissionRequestEntity requestingUserId(Integer requestingUserId) {
+  public PermissionRequestEntity requestingUserId(Long requestingUserId) {
     this.requestingUserId = requestingUserId;
     return this;
   }
@@ -66,15 +66,15 @@ public class PermissionRequestEntity {
   */
   @NotNull 
   @Schema(name = "requestingUserId", example = "123", required = true)
-  public Integer getRequestingUserId() {
+  public Long getRequestingUserId() {
     return requestingUserId;
   }
 
-  public void setRequestingUserId(Integer requestingUserId) {
+  public void setRequestingUserId(Long requestingUserId) {
     this.requestingUserId = requestingUserId;
   }
 
-  public PermissionRequestEntity requestedCardId(Integer requestedCardId) {
+  public PermissionRequestEntity requestedCardId(Long requestedCardId) {
     this.requestedCardId = requestedCardId;
     return this;
   }
@@ -85,11 +85,11 @@ public class PermissionRequestEntity {
   */
   @NotNull 
   @Schema(name = "requestedCardId", example = "12", required = true)
-  public Integer getRequestedCardId() {
+  public Long getRequestedCardId() {
     return requestedCardId;
   }
 
-  public void setRequestedCardId(Integer requestedCardId) {
+  public void setRequestedCardId(Long requestedCardId) {
     this.requestedCardId = requestedCardId;
   }
 

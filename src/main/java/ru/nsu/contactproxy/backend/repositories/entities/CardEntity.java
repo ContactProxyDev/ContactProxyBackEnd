@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,10 +22,10 @@ import javax.annotation.Generated;
 public class CardEntity {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("ownerId")
-  private Integer ownerId;
+  private Long ownerId;
 
   @JsonProperty("name")
   private String name;
@@ -58,7 +59,7 @@ public class CardEntity {
   @JsonProperty("isDeleted")
   private Boolean isDeleted;
 
-  public CardEntity id(Integer id) {
+  public CardEntity id(Long id) {
     this.id = id;
     return this;
   }
@@ -69,15 +70,15 @@ public class CardEntity {
   */
   @NotNull 
   @Schema(name = "id", example = "12", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public CardEntity ownerId(Integer ownerId) {
+  public CardEntity ownerId(Long ownerId) {
     this.ownerId = ownerId;
     return this;
   }
@@ -88,11 +89,11 @@ public class CardEntity {
   */
   @NotNull 
   @Schema(name = "ownerId", example = "123", required = true)
-  public Integer getOwnerId() {
+  public Long getOwnerId() {
     return ownerId;
   }
 
-  public void setOwnerId(Integer ownerId) {
+  public void setOwnerId(Long ownerId) {
     this.ownerId = ownerId;
   }
 
