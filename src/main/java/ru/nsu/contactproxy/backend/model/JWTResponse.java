@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,11 +8,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.annotation.Generated;
 
 /**
- * JWTResponseEntity
+ * JWTResponse
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class JWTResponseEntity {
+public class JWTResponse {
 
   @JsonProperty("userId")
   private Integer userId;
@@ -20,7 +20,7 @@ public class JWTResponseEntity {
   @JsonProperty("jwt")
   private String jwt;
 
-  public JWTResponseEntity userId(Integer userId) {
+  public JWTResponse userId(Integer userId) {
     this.userId = userId;
     return this;
   }
@@ -39,7 +39,7 @@ public class JWTResponseEntity {
     this.userId = userId;
   }
 
-  public JWTResponseEntity jwt(String jwt) {
+  public JWTResponse jwt(String jwt) {
     this.jwt = jwt;
     return this;
   }
@@ -66,7 +66,7 @@ public class JWTResponseEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    JWTResponseEntity jwTResponse = (JWTResponseEntity) o;
+    JWTResponse jwTResponse = (JWTResponse) o;
     return Objects.equals(this.userId, jwTResponse.userId) &&
         Objects.equals(this.jwt, jwTResponse.jwt);
   }
@@ -79,7 +79,7 @@ public class JWTResponseEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class JWTResponseEntity {\n");
+    sb.append("class JWTResponse {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    jwt: ").append(toIndentedString(jwt)).append("\n");
     sb.append("}");

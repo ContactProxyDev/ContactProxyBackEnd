@@ -1,8 +1,8 @@
 package ru.nsu.contactproxy.backend.controllers;
 
-import ru.nsu.contactproxy.backend.repositories.entities.JWTResponseEntity;
+import ru.nsu.contactproxy.backend.model.Error;
+import ru.nsu.contactproxy.backend.model.JWTResponse;
 import ru.nsu.contactproxy.backend.util.ApiUtil;
-import ru.nsu.contactproxy.backend.repositories.entities.ErrorEntity;
 import ru.nsu.contactproxy.backend.model.UserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,7 +46,7 @@ public interface AuthorizeApi {
             @ApiResponse(responseCode = "200", description = "UserEntity successfully refreshed password"),
             @ApiResponse(responseCode = "400", description = "This password is already using"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -74,11 +74,11 @@ public interface AuthorizeApi {
         tags = { "Auth" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful log in", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponseEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "No such user found"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -87,7 +87,7 @@ public interface AuthorizeApi {
         value = "/authorize/login",
         produces = { "application/json" }
     )
-    default ResponseEntity<JWTResponseEntity> login() {
+    default ResponseEntity<JWTResponse> login() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -116,11 +116,11 @@ public interface AuthorizeApi {
         tags = { "Auth" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful register", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponseEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "This email has already been registered"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -130,7 +130,7 @@ public interface AuthorizeApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<JWTResponseEntity> register(
+    default ResponseEntity<JWTResponse> register(
         @Parameter(name = "UserDTO", description = "", required = true) @Valid @RequestBody UserDTO userDTO
     ) {
         getRequest().ifPresent(request -> {

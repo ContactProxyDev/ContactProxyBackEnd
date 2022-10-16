@@ -1,7 +1,7 @@
 package ru.nsu.contactproxy.backend.controllers;
 
 import ru.nsu.contactproxy.backend.repositories.entities.CardEntity;
-import ru.nsu.contactproxy.backend.repositories.entities.ErrorEntity;
+import ru.nsu.contactproxy.backend.model.Error;
 import ru.nsu.contactproxy.backend.util.ApiUtil;
 import ru.nsu.contactproxy.backend.model.CardDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +48,7 @@ public interface CardsApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CardDTO.class))
             }),
             @ApiResponse(responseCode = "500", description = "When something goes wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -89,7 +89,7 @@ public interface CardsApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful delete"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -124,7 +124,7 @@ public interface CardsApi {
             }),
             @ApiResponse(responseCode = "400", description = "CardEntity with this id doesn't exist"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -168,7 +168,7 @@ public interface CardsApi {
             }),
             @ApiResponse(responseCode = "400", description = "CardEntity with this id doesn't exist"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -212,7 +212,7 @@ public interface CardsApi {
             }),
             @ApiResponse(responseCode = "204", description = "Current user doesn't have any cards"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -252,7 +252,7 @@ public interface CardsApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful save"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
