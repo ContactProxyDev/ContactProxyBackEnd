@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,11 +10,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.annotation.Generated;
 
 /**
- * ErrorEntity
+ * Error
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class ErrorEntity {
+public class Error {
 
   @JsonProperty("name")
   private String name;
@@ -22,7 +22,7 @@ public class ErrorEntity {
   @JsonProperty("description")
   private String description;
 
-  public ErrorEntity name(String name) {
+  public Error name(String name) {
     this.name = name;
     return this;
   }
@@ -41,7 +41,7 @@ public class ErrorEntity {
     this.name = name;
   }
 
-  public ErrorEntity description(String description) {
+  public Error description(String description) {
     this.description = description;
     return this;
   }
@@ -68,9 +68,9 @@ public class ErrorEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ErrorEntity errorEntity = (ErrorEntity) o;
-    return Objects.equals(this.name, errorEntity.name) &&
-        Objects.equals(this.description, errorEntity.description);
+    Error error = (Error) o;
+    return Objects.equals(this.name, error.name) &&
+        Objects.equals(this.description, error.description);
   }
 
   @Override
@@ -81,7 +81,7 @@ public class ErrorEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ErrorEntity {\n");
+    sb.append("class Error {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
