@@ -66,7 +66,7 @@ paths:
             operationId: forgotPassword
             responses:
                 "200":
-                    description: UserEntity successfully refreshed password
+                    description: User successfully refreshed password
 
                     content:
                         application/json: {}
@@ -87,7 +87,7 @@ paths:
             parameters: 
             - name: user_id
               in: path
-              description: UserEntity ID
+              description: User ID
               required: true
               style: simple
               explode: false
@@ -120,7 +120,7 @@ paths:
             parameters: 
             - name: card_id
               in: path
-              description: CardEntity ID
+              description: Card ID
               required: true
               style: simple
               explode: false
@@ -135,7 +135,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CardDTO'
                 "400":
-                    description: CardEntity with this id doesn't exist
+                    description: Card with this id doesn't exist
                 default:
                     description: When something went wrong
                     content: 
@@ -151,7 +151,7 @@ paths:
             parameters:
             - name: card_id
               in: path
-              description: CardEntity id
+              description: Card id
               required: true
               style: simple
               explode: false
@@ -178,7 +178,7 @@ paths:
             parameters:
             - name: card_id
               in: path
-              description: CardEntity id
+              description: Card id
               required: true
               style: simple
               explode: false
@@ -193,7 +193,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CardDTO'
                 "400":
-                    description: CardEntity with this id doesn't exist
+                    description: Card with this id doesn't exist
                 default:
                     description: When something went wrong
                     content:
@@ -209,7 +209,7 @@ paths:
             parameters:
             - name: card_id
               in: path
-              description: CardEntity id
+              description: Card id
               required: true
               style: simple
               explode: false

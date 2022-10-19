@@ -34,7 +34,7 @@ public interface AuthorizeApi {
     /**
      * POST /authorize/forgotPassword : Method to refresh user's password
      *
-     * @return UserEntity successfully refreshed password (status code 200)
+     * @return User successfully refreshed password (status code 200)
      *         or This password is already using (status code 400)
      *         or When something went wrong (status code 500)
      */
@@ -43,7 +43,7 @@ public interface AuthorizeApi {
         summary = "Method to refresh user's password",
         tags = { "Auth" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "UserEntity successfully refreshed password"),
+            @ApiResponse(responseCode = "200", description = "User successfully refreshed password"),
             @ApiResponse(responseCode = "400", description = "This password is already using"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))

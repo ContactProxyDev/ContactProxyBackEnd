@@ -1,20 +1,16 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardFieldTypeEntity
+ * CardFieldType
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardFieldTypeEntity {
+public class CardFieldType {
 
   @JsonProperty("id")
   private Long id;
@@ -28,7 +24,7 @@ public class CardFieldTypeEntity {
   @JsonProperty("template")
   private String template;
 
-  public CardFieldTypeEntity id(Long id) {
+  public CardFieldType id(Long id) {
     this.id = id;
     return this;
   }
@@ -47,7 +43,7 @@ public class CardFieldTypeEntity {
     this.id = id;
   }
 
-  public CardFieldTypeEntity name(String name) {
+  public CardFieldType name(String name) {
     this.name = name;
     return this;
   }
@@ -66,7 +62,7 @@ public class CardFieldTypeEntity {
     this.name = name;
   }
 
-  public CardFieldTypeEntity isCopyable(Boolean isCopyable) {
+  public CardFieldType isCopyable(Boolean isCopyable) {
     this.isCopyable = isCopyable;
     return this;
   }
@@ -85,7 +81,7 @@ public class CardFieldTypeEntity {
     this.isCopyable = isCopyable;
   }
 
-  public CardFieldTypeEntity template(String template) {
+  public CardFieldType template(String template) {
     this.template = template;
     return this;
   }
@@ -112,11 +108,11 @@ public class CardFieldTypeEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardFieldTypeEntity cardFieldTypeEntity = (CardFieldTypeEntity) o;
-    return Objects.equals(this.id, cardFieldTypeEntity.id) &&
-        Objects.equals(this.name, cardFieldTypeEntity.name) &&
-        Objects.equals(this.isCopyable, cardFieldTypeEntity.isCopyable) &&
-        Objects.equals(this.template, cardFieldTypeEntity.template);
+    CardFieldType cardFieldType = (CardFieldType) o;
+    return Objects.equals(this.id, cardFieldType.id) &&
+        Objects.equals(this.name, cardFieldType.name) &&
+        Objects.equals(this.isCopyable, cardFieldType.isCopyable) &&
+        Objects.equals(this.template, cardFieldType.template);
   }
 
   @Override
@@ -127,7 +123,7 @@ public class CardFieldTypeEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardFieldTypeEntity {\n");
+    sb.append("class CardFieldType {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    isCopyable: ").append(toIndentedString(isCopyable)).append("\n");

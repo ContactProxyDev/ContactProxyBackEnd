@@ -1,47 +1,43 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardUserPermissionEntity
+ * CardViewRecord
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardUserPermissionEntity {
-
-  @JsonProperty("ownerId")
-  private Long ownerId;
+public class CardViewRecord {
+  @JsonProperty("userId")
+  private Long userId;
 
   @JsonProperty("cardId")
   private Long cardId;
 
-  public CardUserPermissionEntity ownerId(Long ownerId) {
-    this.ownerId = ownerId;
+  public CardViewRecord userId(Long userId) {
+    this.userId = userId;
     return this;
   }
 
   /**
-   * Get ownerId
-   * @return ownerId
+   * Get userId
+   * @return userId
   */
   @NotNull 
-  @Schema(name = "ownerId", example = "123", required = true)
-  public Long getOwnerId() {
-    return ownerId;
+  @Schema(name = "userId", example = "123", required = true)
+  public Long getUserId() {
+    return userId;
   }
 
-  public void setOwnerId(Long ownerId) {
-    this.ownerId = ownerId;
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
-  public CardUserPermissionEntity cardId(Long cardId) {
+  public CardViewRecord cardId(Long cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -68,21 +64,21 @@ public class CardUserPermissionEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardUserPermissionEntity cardUserPermissionEntity = (CardUserPermissionEntity) o;
-    return Objects.equals(this.ownerId, cardUserPermissionEntity.ownerId) &&
-        Objects.equals(this.cardId, cardUserPermissionEntity.cardId);
+    CardViewRecord cardViewRecord = (CardViewRecord) o;
+    return Objects.equals(this.userId, cardViewRecord.userId) &&
+        Objects.equals(this.cardId, cardViewRecord.cardId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ownerId, cardId);
+    return Objects.hash(userId, cardId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardUserPermissionEntity {\n");
-    sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
+    sb.append("class CardViewRecord {\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");
     return sb.toString();

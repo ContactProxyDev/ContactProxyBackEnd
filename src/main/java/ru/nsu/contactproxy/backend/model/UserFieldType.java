@@ -1,20 +1,18 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * UserFieldTypeEntity
+ * UserFieldType
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class UserFieldTypeEntity {
+public class UserFieldType {
+  @JsonProperty("id")
+  private Long id;
 
   @JsonProperty("roleId")
   private Long roleId;
@@ -31,7 +29,15 @@ public class UserFieldTypeEntity {
   @JsonProperty("template")
   private String template;
 
-  public UserFieldTypeEntity roleId(Long roleId) {
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public UserFieldType roleId(Long roleId) {
     this.roleId = roleId;
     return this;
   }
@@ -50,7 +56,7 @@ public class UserFieldTypeEntity {
     this.roleId = roleId;
   }
 
-  public UserFieldTypeEntity fieldName(String fieldName) {
+  public UserFieldType fieldName(String fieldName) {
     this.fieldName = fieldName;
     return this;
   }
@@ -69,7 +75,7 @@ public class UserFieldTypeEntity {
     this.fieldName = fieldName;
   }
 
-  public UserFieldTypeEntity isOptional(Boolean isOptional) {
+  public UserFieldType isOptional(Boolean isOptional) {
     this.isOptional = isOptional;
     return this;
   }
@@ -88,7 +94,7 @@ public class UserFieldTypeEntity {
     this.isOptional = isOptional;
   }
 
-  public UserFieldTypeEntity isCopyAble(Boolean isCopyAble) {
+  public UserFieldType isCopyAble(Boolean isCopyAble) {
     this.isCopyAble = isCopyAble;
     return this;
   }
@@ -107,7 +113,7 @@ public class UserFieldTypeEntity {
     this.isCopyAble = isCopyAble;
   }
 
-  public UserFieldTypeEntity template(String template) {
+  public UserFieldType template(String template) {
     this.template = template;
     return this;
   }
@@ -134,12 +140,12 @@ public class UserFieldTypeEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserFieldTypeEntity userFieldTypeEntity = (UserFieldTypeEntity) o;
-    return Objects.equals(this.roleId, userFieldTypeEntity.roleId) &&
-        Objects.equals(this.fieldName, userFieldTypeEntity.fieldName) &&
-        Objects.equals(this.isOptional, userFieldTypeEntity.isOptional) &&
-        Objects.equals(this.isCopyAble, userFieldTypeEntity.isCopyAble) &&
-        Objects.equals(this.template, userFieldTypeEntity.template);
+    UserFieldType userFieldType = (UserFieldType) o;
+    return Objects.equals(this.roleId, userFieldType.roleId) &&
+        Objects.equals(this.fieldName, userFieldType.fieldName) &&
+        Objects.equals(this.isOptional, userFieldType.isOptional) &&
+        Objects.equals(this.isCopyAble, userFieldType.isCopyAble) &&
+        Objects.equals(this.template, userFieldType.template);
   }
 
   @Override
@@ -150,7 +156,7 @@ public class UserFieldTypeEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserFieldTypeEntity {\n");
+    sb.append("class UserFieldType {\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
     sb.append("    isOptional: ").append(toIndentedString(isOptional)).append("\n");

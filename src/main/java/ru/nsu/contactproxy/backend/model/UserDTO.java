@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-import ru.nsu.contactproxy.backend.repositories.entities.RoleEntity;
-import ru.nsu.contactproxy.backend.repositories.entities.UserFieldEntity;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -33,11 +31,11 @@ public class UserDTO {
 
   @JsonProperty("roleEntities")
   @Valid
-  private List<RoleEntity> roleEntities = new ArrayList<>();
+  private List<Role> roleEntities = new ArrayList<>();
 
   @JsonProperty("userFieldEntities")
   @Valid
-  private List<UserFieldEntity> userFieldEntities = new ArrayList<>();
+  private List<UserField> userFieldEntities = new ArrayList<>();
 
   @JsonProperty("url")
   private String url;
@@ -99,12 +97,12 @@ public class UserDTO {
     this.password = password;
   }
 
-  public UserDTO roles(List<RoleEntity> roleEntities) {
+  public UserDTO roles(List<Role> roleEntities) {
     this.roleEntities = roleEntities;
     return this;
   }
 
-  public UserDTO addRolesItem(RoleEntity rolesItem) {
+  public UserDTO addRolesItem(Role rolesItem) {
     this.roleEntities.add(rolesItem);
     return this;
   }
@@ -115,20 +113,20 @@ public class UserDTO {
   */
   @NotNull @Valid 
   @Schema(name = "roleEntities", required = true)
-  public List<RoleEntity> getRoles() {
+  public List<Role> getRoles() {
     return roleEntities;
   }
 
-  public void setRoles(List<RoleEntity> roleEntities) {
+  public void setRoles(List<Role> roleEntities) {
     this.roleEntities = roleEntities;
   }
 
-  public UserDTO userFields(List<UserFieldEntity> userFieldEntities) {
+  public UserDTO userFields(List<UserField> userFieldEntities) {
     this.userFieldEntities = userFieldEntities;
     return this;
   }
 
-  public UserDTO addUserFieldsItem(UserFieldEntity userFieldsItemEntity) {
+  public UserDTO addUserFieldsItem(UserField userFieldsItemEntity) {
     this.userFieldEntities.add(userFieldsItemEntity);
     return this;
   }
@@ -139,11 +137,11 @@ public class UserDTO {
   */
   @NotNull @Valid 
   @Schema(name = "userFieldEntities", required = true)
-  public List<UserFieldEntity> getUserFields() {
+  public List<UserField> getUserFields() {
     return userFieldEntities;
   }
 
-  public void setUserFields(List<UserFieldEntity> userFieldEntities) {
+  public void setUserFields(List<UserField> userFieldEntities) {
     this.userFieldEntities = userFieldEntities;
   }
 

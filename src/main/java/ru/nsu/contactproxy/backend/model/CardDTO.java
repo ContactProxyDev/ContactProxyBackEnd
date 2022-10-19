@@ -7,7 +7,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.nsu.contactproxy.backend.repositories.entities.CardFieldEntity;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -57,7 +56,7 @@ public class CardDTO {
 
   @JsonProperty("cardFieldEntities")
   @Valid
-  private List<CardFieldEntity> cardFieldEntities = new ArrayList<>();
+  private List<CardField> cardFieldEntities = new ArrayList<>();
 
   public CardDTO name(String name) {
     this.name = name;
@@ -249,12 +248,12 @@ public class CardDTO {
     this.isDeleted = isDeleted;
   }
 
-  public CardDTO cardFields(List<CardFieldEntity> cardFieldEntities) {
+  public CardDTO cardFields(List<CardField> cardFieldEntities) {
     this.cardFieldEntities = cardFieldEntities;
     return this;
   }
 
-  public CardDTO addCardFieldsItem(CardFieldEntity cardFieldsItemEntity) {
+  public CardDTO addCardFieldsItem(CardField cardFieldsItemEntity) {
     this.cardFieldEntities.add(cardFieldsItemEntity);
     return this;
   }
@@ -265,11 +264,11 @@ public class CardDTO {
   */
   @NotNull @Valid 
   @Schema(name = "cardFieldEntities", required = true)
-  public List<CardFieldEntity> getCardFields() {
+  public List<CardField> getCardFields() {
     return cardFieldEntities;
   }
 
-  public void setCardFields(List<CardFieldEntity> cardFieldEntities) {
+  public void setCardFields(List<CardField> cardFieldEntities) {
     this.cardFieldEntities = cardFieldEntities;
   }
 

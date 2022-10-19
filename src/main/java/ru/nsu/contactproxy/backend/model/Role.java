@@ -1,28 +1,24 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * RequestStateEntity
+ * Role
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class RequestStateEntity {
+public class Role {
 
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("stateName")
-  private String stateName;
+  @JsonProperty("name")
+  private String name;
 
-  public RequestStateEntity id(Long id) {
+  public Role id(Long id) {
     this.id = id;
     return this;
   }
@@ -32,7 +28,7 @@ public class RequestStateEntity {
    * @return id
   */
   @NotNull 
-  @Schema(name = "id", example = "12435", required = true)
+  @Schema(name = "id", example = "123", required = true)
   public Long getId() {
     return id;
   }
@@ -41,23 +37,23 @@ public class RequestStateEntity {
     this.id = id;
   }
 
-  public RequestStateEntity stateName(String stateName) {
-    this.stateName = stateName;
+  public Role name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get stateName
-   * @return stateName
+   * Get name
+   * @return name
   */
   @NotNull 
-  @Schema(name = "stateName", required = true)
-  public String getStateName() {
-    return stateName;
+  @Schema(name = "name", example = "BRO", required = true)
+  public String getName() {
+    return name;
   }
 
-  public void setStateName(String stateName) {
-    this.stateName = stateName;
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -68,22 +64,22 @@ public class RequestStateEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RequestStateEntity requestStateEntity = (RequestStateEntity) o;
-    return Objects.equals(this.id, requestStateEntity.id) &&
-        Objects.equals(this.stateName, requestStateEntity.stateName);
+    Role role = (Role) o;
+    return Objects.equals(this.id, role.id) &&
+        Objects.equals(this.name, role.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, stateName);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestStateEntity {\n");
+    sb.append("class Role {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    stateName: ").append(toIndentedString(stateName)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

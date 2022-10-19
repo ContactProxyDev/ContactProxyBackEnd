@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,19 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * PermissionRequestEntity
+ * PermissionRequest
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class PermissionRequestEntity {
+public class PermissionRequest {
 
   @JsonProperty("id")
   private Long id;
@@ -30,13 +26,13 @@ public class PermissionRequestEntity {
   private Long requestedCardId;
 
   @JsonProperty("requestState")
-  private String requestState;
+  private Long requestStateId;
 
   @JsonProperty("requestDate")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime requestDate;
 
-  public PermissionRequestEntity id(Long id) {
+  public PermissionRequest id(Long id) {
     this.id = id;
     return this;
   }
@@ -55,7 +51,7 @@ public class PermissionRequestEntity {
     this.id = id;
   }
 
-  public PermissionRequestEntity requestingUserId(Long requestingUserId) {
+  public PermissionRequest requestingUserId(Long requestingUserId) {
     this.requestingUserId = requestingUserId;
     return this;
   }
@@ -74,7 +70,7 @@ public class PermissionRequestEntity {
     this.requestingUserId = requestingUserId;
   }
 
-  public PermissionRequestEntity requestedCardId(Long requestedCardId) {
+  public PermissionRequest requestedCardId(Long requestedCardId) {
     this.requestedCardId = requestedCardId;
     return this;
   }
@@ -93,8 +89,8 @@ public class PermissionRequestEntity {
     this.requestedCardId = requestedCardId;
   }
 
-  public PermissionRequestEntity requestState(String requestState) {
-    this.requestState = requestState;
+  public PermissionRequest requestState(Long requestState) {
+    this.requestStateId = requestState;
     return this;
   }
 
@@ -103,16 +99,16 @@ public class PermissionRequestEntity {
    * @return requestState
   */
   @NotNull 
-  @Schema(name = "requestState", required = true)
-  public String getRequestState() {
-    return requestState;
+  @Schema(name = "requestStateId", required = true)
+  public Long getRequestState() {
+    return requestStateId;
   }
 
-  public void setRequestState(String requestState) {
-    this.requestState = requestState;
+  public void setRequestState(long requestStateId) {
+    this.requestStateId = requestStateId;
   }
 
-  public PermissionRequestEntity requestDate(OffsetDateTime requestDate) {
+  public PermissionRequest requestDate(OffsetDateTime requestDate) {
     this.requestDate = requestDate;
     return this;
   }
@@ -139,27 +135,27 @@ public class PermissionRequestEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PermissionRequestEntity permissionRequestEntity = (PermissionRequestEntity) o;
-    return Objects.equals(this.id, permissionRequestEntity.id) &&
-        Objects.equals(this.requestingUserId, permissionRequestEntity.requestingUserId) &&
-        Objects.equals(this.requestedCardId, permissionRequestEntity.requestedCardId) &&
-        Objects.equals(this.requestState, permissionRequestEntity.requestState) &&
-        Objects.equals(this.requestDate, permissionRequestEntity.requestDate);
+    PermissionRequest permissionRequest = (PermissionRequest) o;
+    return Objects.equals(this.id, permissionRequest.id) &&
+        Objects.equals(this.requestingUserId, permissionRequest.requestingUserId) &&
+        Objects.equals(this.requestedCardId, permissionRequest.requestedCardId) &&
+        Objects.equals(this.requestStateId, permissionRequest.requestStateId) &&
+        Objects.equals(this.requestDate, permissionRequest.requestDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, requestingUserId, requestedCardId, requestState, requestDate);
+    return Objects.hash(id, requestingUserId, requestedCardId, requestStateId, requestDate);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PermissionRequestEntity {\n");
+    sb.append("class PermissionRequest {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    requestingUserId: ").append(toIndentedString(requestingUserId)).append("\n");
     sb.append("    requestedCardId: ").append(toIndentedString(requestedCardId)).append("\n");
-    sb.append("    requestState: ").append(toIndentedString(requestState)).append("\n");
+    sb.append("    requestState: ").append(toIndentedString(requestStateId)).append("\n");
     sb.append("    requestDate: ").append(toIndentedString(requestDate)).append("\n");
     sb.append("}");
     return sb.toString();

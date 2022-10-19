@@ -1,47 +1,44 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardViewRecordEntity
+ * CardUserPermission
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardViewRecordEntity {
-
-  @JsonProperty("userId")
-  private Long userId;
+public class CardUserPermission {
+  @JsonProperty("ownerId")
+  private Long ownerId;
 
   @JsonProperty("cardId")
   private Long cardId;
 
-  public CardViewRecordEntity userId(Long userId) {
-    this.userId = userId;
+  public CardUserPermission ownerId(Long ownerId) {
+    this.ownerId = ownerId;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get ownerId
+   * @return ownerId
   */
   @NotNull 
-  @Schema(name = "userId", example = "123", required = true)
-  public Long getUserId() {
-    return userId;
+  @Schema(name = "ownerId", example = "123", required = true)
+  public Long getOwnerId() {
+    return ownerId;
   }
 
-  public void setUserId(Long userId) {
-    this.userId = userId;
+  public void setOwnerId(Long ownerId) {
+    this.ownerId = ownerId;
   }
 
-  public CardViewRecordEntity cardId(Long cardId) {
+  public CardUserPermission cardId(Long cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -68,21 +65,21 @@ public class CardViewRecordEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardViewRecordEntity cardViewRecordEntity = (CardViewRecordEntity) o;
-    return Objects.equals(this.userId, cardViewRecordEntity.userId) &&
-        Objects.equals(this.cardId, cardViewRecordEntity.cardId);
+    CardUserPermission cardUserPermission = (CardUserPermission) o;
+    return Objects.equals(this.ownerId, cardUserPermission.ownerId) &&
+        Objects.equals(this.cardId, cardUserPermission.cardId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, cardId);
+    return Objects.hash(ownerId, cardId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardViewRecordEntity {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("class CardUserPermission {\n");
+    sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");
     return sb.toString();
