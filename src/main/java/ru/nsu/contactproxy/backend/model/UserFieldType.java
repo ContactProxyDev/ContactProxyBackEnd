@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * UserFieldType
+ * UserFieldTypeEntity
  */
 public class UserFieldType {
   @JsonProperty("id")
@@ -156,7 +156,7 @@ public class UserFieldType {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserFieldType {\n");
+    sb.append("class UserFieldTypeEntity {\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
     sb.append("    isOptional: ").append(toIndentedString(isOptional)).append("\n");

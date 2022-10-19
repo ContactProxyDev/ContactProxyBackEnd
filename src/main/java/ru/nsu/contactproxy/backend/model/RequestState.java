@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * RequestState
+ * RequestStateEntity
  */
 public class RequestState {
 
@@ -77,7 +77,7 @@ public class RequestState {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestState {\n");
+    sb.append("class RequestStateEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    stateName: ").append(toIndentedString(stateName)).append("\n");
     sb.append("}");

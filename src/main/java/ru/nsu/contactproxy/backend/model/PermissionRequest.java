@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * PermissionRequest
+ * PermissionRequestEntity
  */
 public class PermissionRequest {
 
@@ -151,7 +151,7 @@ public class PermissionRequest {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PermissionRequest {\n");
+    sb.append("class PermissionRequestEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    requestingUserId: ").append(toIndentedString(requestingUserId)).append("\n");
     sb.append("    requestedCardId: ").append(toIndentedString(requestedCardId)).append("\n");

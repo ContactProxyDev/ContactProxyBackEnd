@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Card
+ * CardEntity
  */
 public class Card {
 
@@ -313,7 +313,7 @@ public class Card {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Card {\n");
+    sb.append("class CardEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

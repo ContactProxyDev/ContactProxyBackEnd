@@ -12,6 +12,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * UserField
  */
 public class UserField {
+
+  @JsonProperty("id")
+  private Long id;
+
   @JsonProperty("userId")
   private Long userId;
 

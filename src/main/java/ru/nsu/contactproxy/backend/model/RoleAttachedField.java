@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 /**
- * RoleAttachedField
+ * RoleAttachedFieldEntity
  */
 public class RoleAttachedField {
 
@@ -102,7 +102,7 @@ public class RoleAttachedField {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RoleAttachedField {\n");
+    sb.append("class RoleAttachedFieldEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    userFieldTypeId: ").append(toIndentedString(userFieldTypeId)).append("\n");

@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * CardField
+ * CardFieldEntity
  */
 public class CardField {
 
@@ -146,7 +146,7 @@ public class CardField {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardField {\n");
+    sb.append("class CardFieldEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
