@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user_fields")
 public class UserFieldEntity {
     @Id @GeneratedValue @NotNull
+    @Column(name = "user_field_id")
     private Long id;
 
     @Column(name = "user_id") @NotNull
@@ -22,7 +23,8 @@ public class UserFieldEntity {
     private Long userFieldId;
     //TODO добавить ManyToOne
 
-    @Column(name = "field_data") @NotBlank
+    @Column(name = "field_data")
+    @NotBlank(message = "Field Data can not be empty!")
     private String fieldData;
 
 

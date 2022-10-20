@@ -11,22 +11,27 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user_field_types")
 public class UserFieldTypeEntity {
   @Id @GeneratedValue @NotNull
+  @Column(name = "user_field_type_id")
   private Long id;
 
   @Column(name = "role_id") @NotNull
   private Long roleId;
   //TODO добавить ManyToOne
 
-  @Column(name = "field_name") @NotBlank
+  @Column(name = "field_name")
+  @NotBlank(message = "Field Name can not be empty!")
   private String fieldName;
 
-  @Column(name = "optional_status") @NotNull
+  @Column(name = "optional_status")
+  @NotNull(message = "Optional status counter is required")
   private Boolean isOptional;
 
-  @Column(name = "copyable_status") @NotNull
+  @Column(name = "copyable_status")
+  @NotNull(message = "Copyable status counter is required")
   private Boolean isCopyable;
 
-  @Column(name = "template") @NotBlank
+  @Column(name = "template")
+  @NotBlank(message = "Template can not be empty!")
   private String template;
 
 

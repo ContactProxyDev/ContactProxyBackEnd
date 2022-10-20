@@ -12,21 +12,25 @@ import javax.validation.constraints.NotNull;
 public class CardFieldEntity {
 
   @Id @GeneratedValue @NotNull
+  @Column(name = "card_field_id")
   private Long id;
 
   @Column(name = "card_id") @NotNull
   private Long cardId;
 //TODO добавить аннотацию OneToMany
 
-  @Column(name = "field_name") @NotBlank
+  @Column(name = "field_name")
+  @NotBlank(message = "Field name can not be empty!")
   private String fieldName;
 
-  @Column(name = "field_name") @NotBlank
+  @Column(name = "field_name")
+  @NotBlank(message = "Field data should not be empty!")
   private String fieldData;
 
-  @Column(name = "card_field_type_id") @NotBlank
-  private String cardFieldTypeId;
-//TODO добавить аннотацию OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "card_field_type_id", referencedColumnName = "card_field_type_id",
+          nullable = false, updatable = false)
+  private CardFieldTypeEntity cardFieldType;
 
 
   public Long getId() {
@@ -61,12 +65,5 @@ public class CardFieldEntity {
     this.fieldData = fieldData;
   }
 
-  public String getCardFieldTypeId() {
-    return cardFieldTypeId;
-  }
-
-  public void setCardFieldTypeId(String cardFieldTypeId) {
-    this.cardFieldTypeId = cardFieldTypeId;
-  }
 }
 

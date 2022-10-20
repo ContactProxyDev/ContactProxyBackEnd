@@ -1,6 +1,8 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,22 +11,27 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "permission_requests")
 public class PermissionRequestEntity {
-  @Id @GeneratedValue
+  @Id @GeneratedValue @NotNull
+  @Column(name = "permission_request_id")
   private Long id;
 
-  @Column(name = "requesting_user_id") @NotNull
-  private Long requestingUserId;
-  //TODO добавить аннотацию OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "requesting_user_id", referencedColumnName = "user_id",
+          nullable = false, updatable = false)
+  private UserEntity requestingUser;
 
-  @Column(name = "requesting_card_id") @NotNull
-  private Long requestedCardId;
-  //TODO добавить OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "requested_card_id", referencedColumnName = "card_id",
+          nullable = false, updatable = false)
+  private CardEntity requestedCard;
 
-  @Column(name = "requesting_state_id") @NotNull
-  private Long requestStateId;
-  //TODO добавить OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "request_state_id", referencedColumnName = "request_state_id",
+          nullable = false, updatable = false)
+  private RequestStateEntity requestState;
 
-  @Column(name = "request_date") @NotNull
+  @Column(name = "request_date")
+  @NotBlank(message = "Request date required!")
   private String requestDate;
 
 
@@ -37,27 +44,27 @@ public class PermissionRequestEntity {
   }
 
   public Long getRequestingUserId() {
-    return requestingUserId;
+    return requestingUser.getId();
   }
 
   public void setRequestingUserId(Long requestingUserId) {
-    this.requestingUserId = requestingUserId;
+    requestingUser.setId(requestingUserId);
   }
 
   public Long getRequestedCardId() {
-    return requestedCardId;
+    return requestedCard.getId();
   }
 
   public void setRequestedCardId(Long requestedCardId) {
-    this.requestedCardId = requestedCardId;
+    requestedCard.setId(requestedCardId);
   }
 
   public Long getRequestStateId() {
-    return requestStateId;
+    return requestState.getId();
   }
 
   public void setRequestStateId(Long requestStateId) {
-    this.requestStateId = requestStateId;
+    requestState.setId(requestStateId);
   }
 
   public String getRequestDate() {

@@ -11,9 +11,11 @@ import javax.validation.constraints.NotNull;
 @Table(name = "request_states")
 public class RequestStateEntity {
   @Id @GeneratedValue @NotNull
+  @Column(name = "request_state_id")
   private Long id;
 
-  @Column(name = "state_name") @NotBlank
+  @Column(name = "state_name")
+  @NotBlank(message = "Name can not be empty!")
   private String stateName;
 
 

@@ -12,15 +12,19 @@ import javax.validation.constraints.NotNull;
 public class CardFieldTypeEntity {
 
   @Id @GeneratedValue @NotNull
+  @Column(name = "card_field_type_id")
   private Long id;
 
-  @Column(name = "name") @NotBlank
+  @Column(name = "name")
+  @NotBlank(message = "Name can not be empty!")
   private String name;
 
-  @Column(name = "copyable_status") @NotNull
+  @Column(name = "copyable_status")
+  @NotNull(message = "Copyable status counter is required")
   private Boolean isCopyable;
 
-  @Column(name = "template") @NotBlank
+  @Column(name = "template")
+  @NotBlank(message = "Template should not be empty")
   private String template;
 
 

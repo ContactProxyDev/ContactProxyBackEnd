@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 @Table(name = "roles")
 public class RoleEntity {
   @Id @GeneratedValue @NotNull
+  @Column(name = "role_id")
   private Long id;
 
-  @Column(name = "name") @NotBlank
+  @Column(name = "name")
+  @NotBlank(message = "Name can not be empty!")
   private String name;
 
 

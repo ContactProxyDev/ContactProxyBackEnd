@@ -3,6 +3,8 @@ package ru.nsu.contactproxy.backend.repositories.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * CardEntity
@@ -11,19 +13,24 @@ import javax.validation.constraints.NotNull;
 @Table(name = "cards")
 public class CardEntity {
   @Id @GeneratedValue @NotNull
+  @Column(name = "card_id")
   private Long id;
 
-  @Column(name = "owner_id") @NotNull
-  private Long ownerId;
-//TODO добавить OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "owner_id", referencedColumnName = "user_id",
+          nullable = false, updatable = false)
+  private UserEntity owner;
 
-  @Column(name = "name") @NotBlank
+  @Column(name = "name")
+  @NotBlank(message = "Name can not be empty!")
   private String name;
 
-  @Column(name = "creation_date") @NotBlank
+  @Column(name = "creation_date")
+  @NotBlank(message = "Creation date required!")
   private String creationDate;
 
-  @Column(name = "views_amount") @NotNull
+  @Column(name = "views_amount")
+  @NotNull(message = "View counter is required")
   private Long viewCounter;
 
   @Column(name = "max_views_amount")
@@ -35,17 +42,30 @@ public class CardEntity {
   @Column(name = "specific_url")
   private String url;
 
-  @Column(name = "visible_status") @NotNull
+  @Column(name = "visible_status")
+  @NotNull(message = "Visible status counter is required")
   private Boolean isVisible;
 
-  @Column(name = "authorized_users_only_status") @NotNull
+  @Column(name = "authorized_users_only_status")
+  @NotNull(message = "\"For Authorized Users only\" status counter is required")
   private Boolean isOnlyForAuthorizedUsers;
 
-  @Column(name = "only_with_permission_status") @NotNull
+  @Column(name = "only_with_permission_status")
+  @NotNull(message = "\"With Permission Only\" status counter is required")
   private Boolean isOnlyWithPermission;
 
-  @Column(name = "deleted_status") @NotNull
+  @Column(name = "deleted_status")
+  @NotNull(message = "Deleted status counter is required")
   private Boolean isDeleted;
+
+  @ManyToMany(mappedBy = "viewedCards")
+  private Set<UserEntity> viewedUsers = new HashSet<>();
+
+  @ManyToMany(mappedBy = "savedCards")
+  private Set<UserEntity> savedUsers = new HashSet<>();
+
+  @ManyToMany(mappedBy = "cardPermissions")
+  private Set<UserEntity> userPermissions = new HashSet<>();
 
 
   public Long getId() {
@@ -57,11 +77,11 @@ public class CardEntity {
   }
 
   public Long getOwnerId() {
-    return ownerId;
+    return owner.getId();
   }
 
-  public void setOwnerId(Long ownerId) {
-    this.ownerId = ownerId;
+  public void setOwnerId(Long id) {
+    owner.setId(id);
   }
 
   public String getName() {

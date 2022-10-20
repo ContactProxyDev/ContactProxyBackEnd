@@ -2,7 +2,9 @@ package ru.nsu.contactproxy.backend.repositories.entities;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,12 +16,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users")
 public class UserEntity {
   @Id @GeneratedValue @NotNull
+  @Column(name = "user_id")
   private Long id;
 
-  @Column(name = "email") @NotBlank
+  @Column(name = "email")
+  @NotBlank(message = "Email can not be empty!")
   private String email;
 
-  @Column(name = "password") @NotBlank
+  @Column(name = "password")
+  @NotBlank(message = "Password can not be empty!")
   private String password;
 
   @ManyToMany(fetch = FetchType.EAGER)
@@ -27,6 +32,37 @@ public class UserEntity {
 
   @Column(name = "specific_url")
   private String url;
+
+  @ManyToMany
+  @JoinTable(
+          name = "card_views",
+          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> viewedCards = new HashSet<>();
+
+  @ManyToMany
+  @JoinTable(
+          name = "saved_cards",
+          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> savedCards = new HashSet<>();
+
+  @ManyToMany
+  @JoinTable(
+          name = "card_user_permission",
+          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> cardPermissions = new HashSet<>();
+
 
 
   public Long getId() {
