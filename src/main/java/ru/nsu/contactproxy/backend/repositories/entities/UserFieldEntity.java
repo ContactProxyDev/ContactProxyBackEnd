@@ -15,13 +15,15 @@ public class UserFieldEntity {
     @Column(name = "user_field_id")
     private Long id;
 
-    @Column(name = "user_id") @NotNull
-    private Long userId;
-    //TODO добавить ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",
+            nullable = false, updatable = false)
+    private UserEntity user;
 
-    @Column(name = "user_field_id") @NotNull
-    private Long userFieldId;
-    //TODO добавить ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_attached_field_id",
+            nullable = false, updatable = false)
+    private RoleAttachedFieldEntity roleAttachedField;
 
     @Column(name = "field_data")
     @NotBlank(message = "Field Data can not be empty!")
@@ -36,27 +38,19 @@ public class UserFieldEntity {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getUserFieldId() {
-        return userFieldId;
-    }
-
-    public void setUserFieldId(Long userFieldId) {
-        this.userFieldId = userFieldId;
-    }
-
     public String getFieldData() {
         return fieldData;
     }
 
     public void setFieldData(String fieldData) {
         this.fieldData = fieldData;
+    }
+
+    public RoleAttachedFieldEntity getRoleAttachedField() {
+        return roleAttachedField;
+    }
+
+    public UserEntity getUser() {
+        return user;
     }
 }

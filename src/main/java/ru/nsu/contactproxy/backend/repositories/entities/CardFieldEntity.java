@@ -1,5 +1,6 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,22 +16,23 @@ public class CardFieldEntity {
   @Column(name = "card_field_id")
   private Long id;
 
-  @Column(name = "card_id") @NotNull
-  private Long cardId;
-//TODO добавить аннотацию OneToMany
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "card_id",
+          nullable = false, updatable = false)
+  private CardEntity card;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "card_field_type_id",
+          nullable = false, updatable = false)
+  private CardFieldTypeEntity cardFieldType;
 
   @Column(name = "field_name")
   @NotBlank(message = "Field name can not be empty!")
   private String fieldName;
 
-  @Column(name = "field_name")
+  @Column(name = "field_data")
   @NotBlank(message = "Field data should not be empty!")
   private String fieldData;
-
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "card_field_type_id", referencedColumnName = "card_field_type_id",
-          nullable = false, updatable = false)
-  private CardFieldTypeEntity cardFieldType;
 
 
   public Long getId() {
@@ -39,14 +41,6 @@ public class CardFieldEntity {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Long getCardId() {
-    return cardId;
-  }
-
-  public void setCardId(Long cardId) {
-    this.cardId = cardId;
   }
 
   public String getFieldName() {
@@ -65,5 +59,12 @@ public class CardFieldEntity {
     this.fieldData = fieldData;
   }
 
+  public CardEntity getCard() {
+    return card;
+  }
+
+  public CardFieldTypeEntity getCardFieldType() {
+    return cardFieldType;
+  }
 }
 

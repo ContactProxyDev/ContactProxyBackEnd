@@ -1,6 +1,8 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,8 +29,15 @@ public class UserEntity {
   @NotBlank(message = "Password can not be empty!")
   private String password;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  private List<RoleEntity> roleEntities = new ArrayList<>();
+  @ManyToMany
+  @JoinTable(
+          name = "users_roles",
+          joinColumns = @JoinColumn(name = "user_id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "role_id",
+                  nullable = false, updatable = false)
+  )
+  private Set<RoleEntity> roles = new HashSet<>();
 
   @Column(name = "specific_url")
   private String url;
@@ -36,9 +45,9 @@ public class UserEntity {
   @ManyToMany
   @JoinTable(
           name = "card_views",
-          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+          joinColumns = @JoinColumn(name = "user_id",
                   nullable = false, updatable = false),
-          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+          inverseJoinColumns = @JoinColumn(name = "card_id",
                   nullable = false, updatable = false)
   )
   private Set<CardEntity> viewedCards = new HashSet<>();
@@ -46,9 +55,9 @@ public class UserEntity {
   @ManyToMany
   @JoinTable(
           name = "saved_cards",
-          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+          joinColumns = @JoinColumn(name = "user_id",
                   nullable = false, updatable = false),
-          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+          inverseJoinColumns = @JoinColumn(name = "card_id",
                   nullable = false, updatable = false)
   )
   private Set<CardEntity> savedCards = new HashSet<>();
@@ -56,13 +65,16 @@ public class UserEntity {
   @ManyToMany
   @JoinTable(
           name = "card_user_permission",
-          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id",
+          joinColumns = @JoinColumn(name = "user_id",
                   nullable = false, updatable = false),
-          inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id",
+          inverseJoinColumns = @JoinColumn(name = "card_id",
                   nullable = false, updatable = false)
   )
   private Set<CardEntity> cardPermissions = new HashSet<>();
 
+  @JsonIgnore
+  @OneToMany(mappedBy = "user")
+  private Set<UserFieldEntity> userFields = new HashSet<>();
 
 
   public Long getId() {
@@ -89,20 +101,32 @@ public class UserEntity {
     this.password = password;
   }
 
-  public List<RoleEntity> getRoleEntities() {
-    return roleEntities;
-  }
-
-  public void setRoleEntities(List<RoleEntity> roleEntities) {
-    this.roleEntities = roleEntities;
-  }
-
   public String getUrl() {
     return url;
   }
 
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  public Set<RoleEntity> getRoles() {
+    return roles;
+  }
+
+  public Set<CardEntity> getViewedCards() {
+    return viewedCards;
+  }
+
+  public Set<CardEntity> getSavedCards() {
+    return savedCards;
+  }
+
+  public Set<CardEntity> getCardPermissions() {
+    return cardPermissions;
+  }
+
+  public Set<UserFieldEntity> getUserFields() {
+    return userFields;
   }
 }
 

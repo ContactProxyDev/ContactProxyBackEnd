@@ -14,9 +14,8 @@ public class UserFieldTypeEntity {
   @Column(name = "user_field_type_id")
   private Long id;
 
-  @Column(name = "role_id") @NotNull
-  private Long roleId;
-  //TODO добавить ManyToOne
+  @OneToOne(mappedBy = "userFieldType")
+  private RoleAttachedFieldEntity roleAttachedField;
 
   @Column(name = "field_name")
   @NotBlank(message = "Field Name can not be empty!")
@@ -41,14 +40,6 @@ public class UserFieldTypeEntity {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Long getRoleId() {
-    return roleId;
-  }
-
-  public void setRoleId(Long roleId) {
-    this.roleId = roleId;
   }
 
   public String getFieldName() {
@@ -81,6 +72,10 @@ public class UserFieldTypeEntity {
 
   public void setTemplate(String template) {
     this.template = template;
+  }
+
+  public RoleAttachedFieldEntity getRoleAttachedField() {
+    return roleAttachedField;
   }
 }
 

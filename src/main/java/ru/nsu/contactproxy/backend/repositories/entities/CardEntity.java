@@ -1,5 +1,7 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -58,14 +60,21 @@ public class CardEntity {
   @NotNull(message = "Deleted status counter is required")
   private Boolean isDeleted;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "viewedCards")
   private Set<UserEntity> viewedUsers = new HashSet<>();
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "savedCards")
   private Set<UserEntity> savedUsers = new HashSet<>();
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "cardPermissions")
   private Set<UserEntity> userPermissions = new HashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "card")
+  private Set<CardFieldEntity> cardFields = new HashSet<>();
 
 
   public Long getId() {
@@ -163,5 +172,24 @@ public class CardEntity {
   public void setDeleted(Boolean deleted) {
     isDeleted = deleted;
   }
-}
 
+  public UserEntity getOwner() {
+    return owner;
+  }
+
+  public Set<UserEntity> getViewedUsers() {
+    return viewedUsers;
+  }
+
+  public Set<UserEntity> getSavedUsers() {
+    return savedUsers;
+  }
+
+  public Set<UserEntity> getUserPermissions() {
+    return userPermissions;
+  }
+
+  public Set<CardFieldEntity> getCardFields() {
+    return cardFields;
+  }
+}
