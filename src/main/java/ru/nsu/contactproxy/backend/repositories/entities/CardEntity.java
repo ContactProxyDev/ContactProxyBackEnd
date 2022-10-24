@@ -1,10 +1,14 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "cards")
 public class CardEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "card_id")
   private Long id;
 
@@ -25,23 +29,27 @@ public class CardEntity {
 
   @Column(name = "name")
   @NotBlank(message = "Name can not be empty!")
+  @Length(max = 255, message = "Card Name's length must be less than 255 characters")
   private String name;
 
   @Column(name = "creation_date")
-  @NotBlank(message = "Creation date required!")
-  private String creationDate;
+  @NotNull(message = "Creation date required!")
+  private LocalDateTime creationDate;
 
   @Column(name = "views_amount")
   @NotNull(message = "View counter is required")
+  @Positive(message = "View counter must be positive number")
   private Long viewCounter;
 
   @Column(name = "max_views_amount")
+  @Positive(message = "Maximum view count must be positive number")
   private Long maxViewCount;
 
   @Column(name = "max_view_date")
-  private String maxViewDate;
+  private LocalDateTime maxViewDate;
 
   @Column(name = "specific_url")
+  @Length(max = 255, message = "Specific URL's length must be less than 255 characters")
   private String url;
 
   @Column(name = "visible_status")
@@ -101,11 +109,11 @@ public class CardEntity {
     this.name = name;
   }
 
-  public String getCreationDate() {
+  public LocalDateTime getCreationDate() {
     return creationDate;
   }
 
-  public void setCreationDate(String creationDate) {
+  public void setCreationDate(LocalDateTime creationDate) {
     this.creationDate = creationDate;
   }
 
@@ -125,11 +133,11 @@ public class CardEntity {
     this.maxViewCount = maxViewCount;
   }
 
-  public String getMaxViewDate() {
+  public LocalDateTime getMaxViewDate() {
     return maxViewDate;
   }
 
-  public void setMaxViewDate(String maxViewDate) {
+  public void setMaxViewDate(LocalDateTime maxViewDate) {
     this.maxViewDate = maxViewDate;
   }
 

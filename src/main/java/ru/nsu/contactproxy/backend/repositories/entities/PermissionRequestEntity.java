@@ -4,6 +4,7 @@ package ru.nsu.contactproxy.backend.repositories.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * PermissionRequestEntity
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "permission_requests")
 public class PermissionRequestEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "permission_request_id")
   private Long id;
 
@@ -31,8 +32,8 @@ public class PermissionRequestEntity {
   private RequestStateEntity requestState;
 
   @Column(name = "request_date")
-  @NotBlank(message = "Request date required!")
-  private String requestDate;
+  @NotNull(message = "Request date required!")
+  private LocalDateTime requestDate;
 
 
   public Long getId() {
@@ -67,11 +68,11 @@ public class PermissionRequestEntity {
     requestState.setId(requestStateId);
   }
 
-  public String getRequestDate() {
+  public LocalDateTime getRequestDate() {
     return requestDate;
   }
 
-  public void setRequestDate(String requestDate) {
+  public void setRequestDate(LocalDateTime requestDate) {
     this.requestDate = requestDate;
   }
 }

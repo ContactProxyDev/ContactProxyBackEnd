@@ -1,5 +1,7 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "user_field_types")
 public class UserFieldTypeEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "user_field_type_id")
   private Long id;
 
@@ -19,18 +21,19 @@ public class UserFieldTypeEntity {
 
   @Column(name = "field_name")
   @NotBlank(message = "Field Name can not be empty!")
+  @Length(max = 255, message = "User Field Type Name's length must be less than 255 characters")
   private String fieldName;
 
   @Column(name = "optional_status")
-  @NotNull(message = "Optional status counter is required")
+  @NotNull(message = "Optional status is required")
   private Boolean isOptional;
 
   @Column(name = "copyable_status")
-  @NotNull(message = "Copyable status counter is required")
+  @NotNull(message = "Copyable status is required")
   private Boolean isCopyable;
 
   @Column(name = "template")
-  @NotBlank(message = "Template can not be empty!")
+  @Length(max = 255, message = "Template's length must be less than 255 characters")
   private String template;
 
 

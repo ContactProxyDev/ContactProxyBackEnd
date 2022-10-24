@@ -1,5 +1,7 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,20 +13,21 @@ import javax.validation.constraints.NotNull;
 @Table(name = "card_field_types")
 public class CardFieldTypeEntity {
 
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "card_field_type_id")
   private Long id;
 
   @Column(name = "name")
   @NotBlank(message = "Name can not be empty!")
+  @Length(max = 255, message = "Card Field Type Name's length must be less than 255 characters")
   private String name;
 
   @Column(name = "copyable_status")
-  @NotNull(message = "Copyable status counter is required")
+  @NotNull(message = "Copyable status is required")
   private Boolean isCopyable;
 
   @Column(name = "template")
-  @NotBlank(message = "Template should not be empty")
+  @Length(max = 255, message = "Template's length must be less than 255 characters")
   private String template;
 
 

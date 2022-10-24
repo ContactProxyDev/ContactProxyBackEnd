@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "role_attached_fields")
 public class RoleAttachedFieldEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "role_attached_field_id")
   private Long id;
 

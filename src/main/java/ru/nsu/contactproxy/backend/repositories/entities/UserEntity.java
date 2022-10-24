@@ -2,6 +2,7 @@ package ru.nsu.contactproxy.backend.repositories.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,16 +18,18 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "user_id")
   private Long id;
 
   @Column(name = "email")
   @NotBlank(message = "Email can not be empty!")
+  @Length(max = 255, message = "Email's length must be less than 255 characters")
   private String email;
 
   @Column(name = "password")
   @NotBlank(message = "Password can not be empty!")
+  @Length(max = 30, message = "Passwords's length must be less than 30 characters")
   private String password;
 
   @ManyToMany
@@ -40,6 +43,7 @@ public class UserEntity {
   private Set<RoleEntity> roles = new HashSet<>();
 
   @Column(name = "specific_url")
+  @Length(max = 255, message = "Specific URL's length must be less than 255 characters")
   private String url;
 
   @ManyToMany

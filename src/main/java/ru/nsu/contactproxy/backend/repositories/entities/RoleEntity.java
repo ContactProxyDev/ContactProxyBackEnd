@@ -2,6 +2,7 @@ package ru.nsu.contactproxy.backend.repositories.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,12 +16,13 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class RoleEntity {
-  @Id @GeneratedValue @NotNull
+  @Id @GeneratedValue
   @Column(name = "role_id")
   private Long id;
 
   @Column(name = "name")
   @NotBlank(message = "Name can not be empty!")
+  @Length(max = 255, message = "Role Name's length must be less than 255 characters")
   private String name;
 
   @JsonIgnore
