@@ -4,23 +4,23 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardDTO
+ * CardEntity
  */
+public class Card {
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardDTO {
+  @JsonProperty("id")
+  private Long id;
+
+  @JsonProperty("ownerId")
+  private Long ownerId;
 
   @JsonProperty("name")
   private String name;
@@ -30,10 +30,10 @@ public class CardDTO {
   private OffsetDateTime creationDate;
 
   @JsonProperty("viewCounter")
-  private Integer viewCounter;
+  private Long viewCounter;
 
   @JsonProperty("maxViewCount")
-  private Integer maxViewCount;
+  private Long maxViewCount;
 
   @JsonProperty("maxViewDate")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -54,11 +54,45 @@ public class CardDTO {
   @JsonProperty("isDeleted")
   private Boolean isDeleted;
 
-  @JsonProperty("cardFieldEntities")
-  @Valid
-  private List<CardField> cardFieldEntities = new ArrayList<>();
+  public Card id(Long id) {
+    this.id = id;
+    return this;
+  }
 
-  public CardDTO name(String name) {
+  /**
+   * Get id
+   * @return id
+  */
+  @NotNull 
+  @Schema(name = "id", example = "12", required = true)
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Card ownerId(Long ownerId) {
+    this.ownerId = ownerId;
+    return this;
+  }
+
+  /**
+   * Get ownerId
+   * @return ownerId
+  */
+  @NotNull 
+  @Schema(name = "ownerId", example = "123", required = true)
+  public Long getOwnerId() {
+    return ownerId;
+  }
+
+  public void setOwnerId(Long ownerId) {
+    this.ownerId = ownerId;
+  }
+
+  public Card name(String name) {
     this.name = name;
     return this;
   }
@@ -77,7 +111,7 @@ public class CardDTO {
     this.name = name;
   }
 
-  public CardDTO creationDate(OffsetDateTime creationDate) {
+  public Card creationDate(OffsetDateTime creationDate) {
     this.creationDate = creationDate;
     return this;
   }
@@ -86,8 +120,8 @@ public class CardDTO {
    * Date of card creation
    * @return creationDate
   */
-  @Valid 
-  @Schema(name = "creationDate", example = "2021-01-30T08:30Z", description = "Date of card creation", required = false)
+  @NotNull @Valid 
+  @Schema(name = "creationDate", example = "2021-01-30T08:30Z", description = "Date of card creation", required = true)
   public OffsetDateTime getCreationDate() {
     return creationDate;
   }
@@ -96,7 +130,7 @@ public class CardDTO {
     this.creationDate = creationDate;
   }
 
-  public CardDTO viewCounter(Integer viewCounter) {
+  public Card viewCounter(Long viewCounter) {
     this.viewCounter = viewCounter;
     return this;
   }
@@ -105,17 +139,17 @@ public class CardDTO {
    * Get viewCounter
    * @return viewCounter
   */
-  
-  @Schema(name = "viewCounter", example = "10", required = false)
-  public Integer getViewCounter() {
+  @NotNull 
+  @Schema(name = "viewCounter", example = "10", required = true)
+  public Long getViewCounter() {
     return viewCounter;
   }
 
-  public void setViewCounter(Integer viewCounter) {
+  public void setViewCounter(Long viewCounter) {
     this.viewCounter = viewCounter;
   }
 
-  public CardDTO maxViewCount(Integer maxViewCount) {
+  public Card maxViewCount(Long maxViewCount) {
     this.maxViewCount = maxViewCount;
     return this;
   }
@@ -126,15 +160,15 @@ public class CardDTO {
   */
   @NotNull 
   @Schema(name = "maxViewCount", example = "15", description = "Top border of view counter", required = true)
-  public Integer getMaxViewCount() {
+  public Long getMaxViewCount() {
     return maxViewCount;
   }
 
-  public void setMaxViewCount(Integer maxViewCount) {
+  public void setMaxViewCount(Long maxViewCount) {
     this.maxViewCount = maxViewCount;
   }
 
-  public CardDTO maxViewDate(OffsetDateTime maxViewDate) {
+  public Card maxViewDate(OffsetDateTime maxViewDate) {
     this.maxViewDate = maxViewDate;
     return this;
   }
@@ -153,7 +187,7 @@ public class CardDTO {
     this.maxViewDate = maxViewDate;
   }
 
-  public CardDTO url(String url) {
+  public Card url(String url) {
     this.url = url;
     return this;
   }
@@ -162,8 +196,8 @@ public class CardDTO {
    * Get url
    * @return url
   */
-  @NotNull 
-  @Schema(name = "url", example = "krasivyi-url", required = true)
+  
+  @Schema(name = "url", example = "krasivyi-url", required = false)
   public String getUrl() {
     return url;
   }
@@ -172,7 +206,7 @@ public class CardDTO {
     this.url = url;
   }
 
-  public CardDTO isVisible(Boolean isVisible) {
+  public Card isVisible(Boolean isVisible) {
     this.isVisible = isVisible;
     return this;
   }
@@ -191,7 +225,7 @@ public class CardDTO {
     this.isVisible = isVisible;
   }
 
-  public CardDTO isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
+  public Card isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
     return this;
   }
@@ -210,7 +244,7 @@ public class CardDTO {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
   }
 
-  public CardDTO isOnlyWithPermission(Boolean isOnlyWithPermission) {
+  public Card isOnlyWithPermission(Boolean isOnlyWithPermission) {
     this.isOnlyWithPermission = isOnlyWithPermission;
     return this;
   }
@@ -229,7 +263,7 @@ public class CardDTO {
     this.isOnlyWithPermission = isOnlyWithPermission;
   }
 
-  public CardDTO isDeleted(Boolean isDeleted) {
+  public Card isDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
     return this;
   }
@@ -238,38 +272,14 @@ public class CardDTO {
    * Get isDeleted
    * @return isDeleted
   */
-  
-  @Schema(name = "isDeleted", required = false)
+  @NotNull 
+  @Schema(name = "isDeleted", required = true)
   public Boolean getIsDeleted() {
     return isDeleted;
   }
 
   public void setIsDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
-  }
-
-  public CardDTO cardFields(List<CardField> cardFieldEntities) {
-    this.cardFieldEntities = cardFieldEntities;
-    return this;
-  }
-
-  public CardDTO addCardFieldsItem(CardField cardFieldsItemEntity) {
-    this.cardFieldEntities.add(cardFieldsItemEntity);
-    return this;
-  }
-
-  /**
-   * Get cardFieldEntities
-   * @return cardFieldEntities
-  */
-  @NotNull @Valid 
-  @Schema(name = "cardFieldEntities", required = true)
-  public List<CardField> getCardFields() {
-    return cardFieldEntities;
-  }
-
-  public void setCardFields(List<CardField> cardFieldEntities) {
-    this.cardFieldEntities = cardFieldEntities;
   }
 
   @Override
@@ -280,29 +290,32 @@ public class CardDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardDTO cardDTO = (CardDTO) o;
-    return Objects.equals(this.name, cardDTO.name) &&
-        Objects.equals(this.creationDate, cardDTO.creationDate) &&
-        Objects.equals(this.viewCounter, cardDTO.viewCounter) &&
-        Objects.equals(this.maxViewCount, cardDTO.maxViewCount) &&
-        Objects.equals(this.maxViewDate, cardDTO.maxViewDate) &&
-        Objects.equals(this.url, cardDTO.url) &&
-        Objects.equals(this.isVisible, cardDTO.isVisible) &&
-        Objects.equals(this.isOnlyForAuthorizedUsers, cardDTO.isOnlyForAuthorizedUsers) &&
-        Objects.equals(this.isOnlyWithPermission, cardDTO.isOnlyWithPermission) &&
-        Objects.equals(this.isDeleted, cardDTO.isDeleted) &&
-        Objects.equals(this.cardFieldEntities, cardDTO.cardFieldEntities);
+    Card cardEntity = (Card) o;
+    return Objects.equals(this.id, cardEntity.id) &&
+        Objects.equals(this.ownerId, cardEntity.ownerId) &&
+        Objects.equals(this.name, cardEntity.name) &&
+        Objects.equals(this.creationDate, cardEntity.creationDate) &&
+        Objects.equals(this.viewCounter, cardEntity.viewCounter) &&
+        Objects.equals(this.maxViewCount, cardEntity.maxViewCount) &&
+        Objects.equals(this.maxViewDate, cardEntity.maxViewDate) &&
+        Objects.equals(this.url, cardEntity.url) &&
+        Objects.equals(this.isVisible, cardEntity.isVisible) &&
+        Objects.equals(this.isOnlyForAuthorizedUsers, cardEntity.isOnlyForAuthorizedUsers) &&
+        Objects.equals(this.isOnlyWithPermission, cardEntity.isOnlyWithPermission) &&
+        Objects.equals(this.isDeleted, cardEntity.isDeleted);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted, cardFieldEntities);
+    return Objects.hash(id, ownerId, name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardDTO {\n");
+    sb.append("class CardEntity {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    creationDate: ").append(toIndentedString(creationDate)).append("\n");
     sb.append("    viewCounter: ").append(toIndentedString(viewCounter)).append("\n");
@@ -313,7 +326,6 @@ public class CardDTO {
     sb.append("    isOnlyForAuthorizedUsers: ").append(toIndentedString(isOnlyForAuthorizedUsers)).append("\n");
     sb.append("    isOnlyWithPermission: ").append(toIndentedString(isOnlyWithPermission)).append("\n");
     sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
-    sb.append("    cardFieldEntities: ").append(toIndentedString(cardFieldEntities)).append("\n");
     sb.append("}");
     return sb.toString();
   }

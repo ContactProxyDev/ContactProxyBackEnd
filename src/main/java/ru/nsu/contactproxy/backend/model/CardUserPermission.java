@@ -1,28 +1,25 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardUserPermissionEntity
+ * CardUserPermission
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardUserPermissionEntity {
-
+public class CardUserPermission {
   @JsonProperty("ownerId")
-  private Integer ownerId;
+  private Long ownerId;
 
   @JsonProperty("cardId")
-  private Integer cardId;
+  private Long cardId;
 
-  public CardUserPermissionEntity ownerId(Integer ownerId) {
+  public CardUserPermission ownerId(Long ownerId) {
     this.ownerId = ownerId;
     return this;
   }
@@ -33,15 +30,15 @@ public class CardUserPermissionEntity {
   */
   @NotNull 
   @Schema(name = "ownerId", example = "123", required = true)
-  public Integer getOwnerId() {
+  public Long getOwnerId() {
     return ownerId;
   }
 
-  public void setOwnerId(Integer ownerId) {
+  public void setOwnerId(Long ownerId) {
     this.ownerId = ownerId;
   }
 
-  public CardUserPermissionEntity cardId(Integer cardId) {
+  public CardUserPermission cardId(Long cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -52,11 +49,11 @@ public class CardUserPermissionEntity {
   */
   @NotNull 
   @Schema(name = "cardId", example = "12", required = true)
-  public Integer getCardId() {
+  public Long getCardId() {
     return cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 
@@ -68,9 +65,9 @@ public class CardUserPermissionEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardUserPermissionEntity cardUserPermissionEntity = (CardUserPermissionEntity) o;
-    return Objects.equals(this.ownerId, cardUserPermissionEntity.ownerId) &&
-        Objects.equals(this.cardId, cardUserPermissionEntity.cardId);
+    CardUserPermission cardUserPermission = (CardUserPermission) o;
+    return Objects.equals(this.ownerId, cardUserPermission.ownerId) &&
+        Objects.equals(this.cardId, cardUserPermission.cardId);
   }
 
   @Override
@@ -81,7 +78,7 @@ public class CardUserPermissionEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardUserPermissionEntity {\n");
+    sb.append("class CardUserPermission {\n");
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");

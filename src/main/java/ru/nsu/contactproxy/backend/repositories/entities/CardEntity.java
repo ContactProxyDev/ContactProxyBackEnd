@@ -1,112 +1,106 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
-import java.time.OffsetDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import javax.annotation.Generated;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * CardEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
+@Entity
+@Table(name = "cards")
 public class CardEntity {
+  @Id @GeneratedValue
+  @Column(name = "card_id")
+  private Long id;
 
-  @JsonProperty("id")
-  private Integer id;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "owner_id", referencedColumnName = "user_id",
+          nullable = false, updatable = false)
+  private UserEntity owner;
 
-  @JsonProperty("ownerId")
-  private Integer ownerId;
-
-  @JsonProperty("name")
+  @Column(name = "name")
+  @NotBlank(message = "Name can not be empty!")
+  @Length(max = 255, message = "Card Name's length must be less than 255 characters")
   private String name;
 
-  @JsonProperty("creationDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime creationDate;
+  @Column(name = "creation_date")
+  @NotNull(message = "Creation date required!")
+  private LocalDateTime creationDate;
 
-  @JsonProperty("viewCounter")
-  private Integer viewCounter;
+  @Column(name = "views_amount")
+  @NotNull(message = "View counter is required")
+  @Positive(message = "View counter must be positive number")
+  private Long viewCounter;
 
-  @JsonProperty("maxViewCount")
-  private Integer maxViewCount;
+  @Column(name = "max_views_amount")
+  @Positive(message = "Maximum view count must be positive number")
+  private Long maxViewCount;
 
-  @JsonProperty("maxViewDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime maxViewDate;
+  @Column(name = "max_view_date")
+  private LocalDateTime maxViewDate;
 
-  @JsonProperty("url")
+  @Column(name = "specific_url")
+  @Length(max = 255, message = "Specific URL's length must be less than 255 characters")
   private String url;
 
-  @JsonProperty("isVisible")
+  @Column(name = "visible_status")
+  @NotNull(message = "Visible status counter is required")
   private Boolean isVisible;
 
-  @JsonProperty("isOnlyForAuthorizedUsers")
+  @Column(name = "authorized_users_only_status")
+  @NotNull(message = "\"For Authorized Users only\" status counter is required")
   private Boolean isOnlyForAuthorizedUsers;
 
-  @JsonProperty("isOnlyWithPermission")
+  @Column(name = "only_with_permission_status")
+  @NotNull(message = "\"With Permission Only\" status counter is required")
   private Boolean isOnlyWithPermission;
 
-  @JsonProperty("isDeleted")
+  @Column(name = "deleted_status")
+  @NotNull(message = "Deleted status counter is required")
   private Boolean isDeleted;
 
-  public CardEntity id(Integer id) {
-    this.id = id;
-    return this;
-  }
+  @JsonIgnore
+  @ManyToMany(mappedBy = "viewedCards")
+  private Set<UserEntity> viewedUsers = new HashSet<>();
 
-  /**
-   * Get id
-   * @return id
-  */
-  @NotNull 
-  @Schema(name = "id", example = "12", required = true)
-  public Integer getId() {
+  @JsonIgnore
+  @ManyToMany(mappedBy = "savedCards")
+  private Set<UserEntity> savedUsers = new HashSet<>();
+
+  @JsonIgnore
+  @ManyToMany(mappedBy = "cardPermissions")
+  private Set<UserEntity> userPermissions = new HashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "card")
+  private Set<CardFieldEntity> cardFields = new HashSet<>();
+
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public CardEntity ownerId(Integer ownerId) {
-    this.ownerId = ownerId;
-    return this;
+  public Long getOwnerId() {
+    return owner.getId();
   }
 
-  /**
-   * Get ownerId
-   * @return ownerId
-  */
-  @NotNull 
-  @Schema(name = "ownerId", example = "123", required = true)
-  public Integer getOwnerId() {
-    return ownerId;
+  public void setOwnerId(Long id) {
+    owner.setId(id);
   }
 
-  public void setOwnerId(Integer ownerId) {
-    this.ownerId = ownerId;
-  }
-
-  public CardEntity name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-  */
-  @NotNull 
-  @Schema(name = "name", example = "card", required = true)
   public String getName() {
     return name;
   }
@@ -115,93 +109,38 @@ public class CardEntity {
     this.name = name;
   }
 
-  public CardEntity creationDate(OffsetDateTime creationDate) {
-    this.creationDate = creationDate;
-    return this;
-  }
-
-  /**
-   * Date of card creation
-   * @return creationDate
-  */
-  @NotNull @Valid 
-  @Schema(name = "creationDate", example = "2021-01-30T08:30Z", description = "Date of card creation", required = true)
-  public OffsetDateTime getCreationDate() {
+  public LocalDateTime getCreationDate() {
     return creationDate;
   }
 
-  public void setCreationDate(OffsetDateTime creationDate) {
+  public void setCreationDate(LocalDateTime creationDate) {
     this.creationDate = creationDate;
   }
 
-  public CardEntity viewCounter(Integer viewCounter) {
-    this.viewCounter = viewCounter;
-    return this;
-  }
-
-  /**
-   * Get viewCounter
-   * @return viewCounter
-  */
-  @NotNull 
-  @Schema(name = "viewCounter", example = "10", required = true)
-  public Integer getViewCounter() {
+  public Long getViewCounter() {
     return viewCounter;
   }
 
-  public void setViewCounter(Integer viewCounter) {
+  public void setViewCounter(Long viewCounter) {
     this.viewCounter = viewCounter;
   }
 
-  public CardEntity maxViewCount(Integer maxViewCount) {
-    this.maxViewCount = maxViewCount;
-    return this;
-  }
-
-  /**
-   * Top border of view counter
-   * @return maxViewCount
-  */
-  @NotNull 
-  @Schema(name = "maxViewCount", example = "15", description = "Top border of view counter", required = true)
-  public Integer getMaxViewCount() {
+  public Long getMaxViewCount() {
     return maxViewCount;
   }
 
-  public void setMaxViewCount(Integer maxViewCount) {
+  public void setMaxViewCount(Long maxViewCount) {
     this.maxViewCount = maxViewCount;
   }
 
-  public CardEntity maxViewDate(OffsetDateTime maxViewDate) {
-    this.maxViewDate = maxViewDate;
-    return this;
-  }
-
-  /**
-   * Top border of card existing
-   * @return maxViewDate
-  */
-  @NotNull @Valid 
-  @Schema(name = "maxViewDate", example = "2021-01-31T08:30Z", description = "Top border of card existing", required = true)
-  public OffsetDateTime getMaxViewDate() {
+  public LocalDateTime getMaxViewDate() {
     return maxViewDate;
   }
 
-  public void setMaxViewDate(OffsetDateTime maxViewDate) {
+  public void setMaxViewDate(LocalDateTime maxViewDate) {
     this.maxViewDate = maxViewDate;
   }
 
-  public CardEntity url(String url) {
-    this.url = url;
-    return this;
-  }
-
-  /**
-   * Get url
-   * @return url
-  */
-  
-  @Schema(name = "url", example = "krasivyi-url", required = false)
   public String getUrl() {
     return url;
   }
@@ -210,139 +149,55 @@ public class CardEntity {
     this.url = url;
   }
 
-  public CardEntity isVisible(Boolean isVisible) {
-    this.isVisible = isVisible;
-    return this;
-  }
-
-  /**
-   * Get isVisible
-   * @return isVisible
-  */
-  @NotNull 
-  @Schema(name = "isVisible", required = true)
-  public Boolean getIsVisible() {
+  public Boolean getVisible() {
     return isVisible;
   }
 
-  public void setIsVisible(Boolean isVisible) {
-    this.isVisible = isVisible;
+  public void setVisible(Boolean visible) {
+    isVisible = visible;
   }
 
-  public CardEntity isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
-    this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
-    return this;
-  }
-
-  /**
-   * Get isOnlyForAuthorizedUsers
-   * @return isOnlyForAuthorizedUsers
-  */
-  @NotNull 
-  @Schema(name = "isOnlyForAuthorizedUsers", required = true)
-  public Boolean getIsOnlyForAuthorizedUsers() {
+  public Boolean getOnlyForAuthorizedUsers() {
     return isOnlyForAuthorizedUsers;
   }
 
-  public void setIsOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
-    this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
+  public void setOnlyForAuthorizedUsers(Boolean onlyForAuthorizedUsers) {
+    isOnlyForAuthorizedUsers = onlyForAuthorizedUsers;
   }
 
-  public CardEntity isOnlyWithPermission(Boolean isOnlyWithPermission) {
-    this.isOnlyWithPermission = isOnlyWithPermission;
-    return this;
-  }
-
-  /**
-   * Get isOnlyWithPermission
-   * @return isOnlyWithPermission
-  */
-  @NotNull 
-  @Schema(name = "isOnlyWithPermission", required = true)
-  public Boolean getIsOnlyWithPermission() {
+  public Boolean getOnlyWithPermission() {
     return isOnlyWithPermission;
   }
 
-  public void setIsOnlyWithPermission(Boolean isOnlyWithPermission) {
-    this.isOnlyWithPermission = isOnlyWithPermission;
+  public void setOnlyWithPermission(Boolean onlyWithPermission) {
+    isOnlyWithPermission = onlyWithPermission;
   }
 
-  public CardEntity isDeleted(Boolean isDeleted) {
-    this.isDeleted = isDeleted;
-    return this;
-  }
-
-  /**
-   * Get isDeleted
-   * @return isDeleted
-  */
-  @NotNull 
-  @Schema(name = "isDeleted", required = true)
-  public Boolean getIsDeleted() {
+  public Boolean getDeleted() {
     return isDeleted;
   }
 
-  public void setIsDeleted(Boolean isDeleted) {
-    this.isDeleted = isDeleted;
+  public void setDeleted(Boolean deleted) {
+    isDeleted = deleted;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    CardEntity cardEntity = (CardEntity) o;
-    return Objects.equals(this.id, cardEntity.id) &&
-        Objects.equals(this.ownerId, cardEntity.ownerId) &&
-        Objects.equals(this.name, cardEntity.name) &&
-        Objects.equals(this.creationDate, cardEntity.creationDate) &&
-        Objects.equals(this.viewCounter, cardEntity.viewCounter) &&
-        Objects.equals(this.maxViewCount, cardEntity.maxViewCount) &&
-        Objects.equals(this.maxViewDate, cardEntity.maxViewDate) &&
-        Objects.equals(this.url, cardEntity.url) &&
-        Objects.equals(this.isVisible, cardEntity.isVisible) &&
-        Objects.equals(this.isOnlyForAuthorizedUsers, cardEntity.isOnlyForAuthorizedUsers) &&
-        Objects.equals(this.isOnlyWithPermission, cardEntity.isOnlyWithPermission) &&
-        Objects.equals(this.isDeleted, cardEntity.isDeleted);
+  public UserEntity getOwner() {
+    return owner;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, ownerId, name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted);
+  public Set<UserEntity> getViewedUsers() {
+    return viewedUsers;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CardEntity {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    creationDate: ").append(toIndentedString(creationDate)).append("\n");
-    sb.append("    viewCounter: ").append(toIndentedString(viewCounter)).append("\n");
-    sb.append("    maxViewCount: ").append(toIndentedString(maxViewCount)).append("\n");
-    sb.append("    maxViewDate: ").append(toIndentedString(maxViewDate)).append("\n");
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
-    sb.append("    isVisible: ").append(toIndentedString(isVisible)).append("\n");
-    sb.append("    isOnlyForAuthorizedUsers: ").append(toIndentedString(isOnlyForAuthorizedUsers)).append("\n");
-    sb.append("    isOnlyWithPermission: ").append(toIndentedString(isOnlyWithPermission)).append("\n");
-    sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
-    sb.append("}");
-    return sb.toString();
+  public Set<UserEntity> getSavedUsers() {
+    return savedUsers;
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  public Set<UserEntity> getUserPermissions() {
+    return userPermissions;
+  }
+
+  public Set<CardFieldEntity> getCardFields() {
+    return cardFields;
   }
 }
-

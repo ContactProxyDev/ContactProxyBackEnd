@@ -1,179 +1,79 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import javax.annotation.Generated;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * PermissionRequestEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
+@Entity
+@Table(name = "permission_requests")
 public class PermissionRequestEntity {
+  @Id @GeneratedValue
+  @Column(name = "permission_request_id")
+  private Long id;
 
-  @JsonProperty("id")
-  private Integer id;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "requesting_user_id", referencedColumnName = "user_id",
+          nullable = false, updatable = false)
+  private UserEntity requestingUser;
 
-  @JsonProperty("requestingUserId")
-  private Integer requestingUserId;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "requested_card_id", referencedColumnName = "card_id",
+          nullable = false, updatable = false)
+  private CardEntity requestedCard;
 
-  @JsonProperty("requestedCardId")
-  private Integer requestedCardId;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "request_state_id", referencedColumnName = "request_state_id",
+          nullable = false, updatable = false)
+  private RequestStateEntity requestState;
 
-  @JsonProperty("requestState")
-  private String requestState;
+  @Column(name = "request_date")
+  @NotNull(message = "Request date required!")
+  private LocalDateTime requestDate;
 
-  @JsonProperty("requestDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime requestDate;
 
-  public PermissionRequestEntity id(Integer id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-  */
-  @NotNull 
-  @Schema(name = "id", example = "1234", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public PermissionRequestEntity requestingUserId(Integer requestingUserId) {
-    this.requestingUserId = requestingUserId;
-    return this;
+  public Long getRequestingUserId() {
+    return requestingUser.getId();
   }
 
-  /**
-   * Get requestingUserId
-   * @return requestingUserId
-  */
-  @NotNull 
-  @Schema(name = "requestingUserId", example = "123", required = true)
-  public Integer getRequestingUserId() {
-    return requestingUserId;
+  public void setRequestingUserId(Long requestingUserId) {
+    requestingUser.setId(requestingUserId);
   }
 
-  public void setRequestingUserId(Integer requestingUserId) {
-    this.requestingUserId = requestingUserId;
+  public Long getRequestedCardId() {
+    return requestedCard.getId();
   }
 
-  public PermissionRequestEntity requestedCardId(Integer requestedCardId) {
-    this.requestedCardId = requestedCardId;
-    return this;
+  public void setRequestedCardId(Long requestedCardId) {
+    requestedCard.setId(requestedCardId);
   }
 
-  /**
-   * Get requestedCardId
-   * @return requestedCardId
-  */
-  @NotNull 
-  @Schema(name = "requestedCardId", example = "12", required = true)
-  public Integer getRequestedCardId() {
-    return requestedCardId;
+  public Long getRequestStateId() {
+    return requestState.getId();
   }
 
-  public void setRequestedCardId(Integer requestedCardId) {
-    this.requestedCardId = requestedCardId;
+  public void setRequestStateId(Long requestStateId) {
+    requestState.setId(requestStateId);
   }
 
-  public PermissionRequestEntity requestState(String requestState) {
-    this.requestState = requestState;
-    return this;
-  }
-
-  /**
-   * Get requestState
-   * @return requestState
-  */
-  @NotNull 
-  @Schema(name = "requestState", required = true)
-  public String getRequestState() {
-    return requestState;
-  }
-
-  public void setRequestState(String requestState) {
-    this.requestState = requestState;
-  }
-
-  public PermissionRequestEntity requestDate(OffsetDateTime requestDate) {
-    this.requestDate = requestDate;
-    return this;
-  }
-
-  /**
-   * Date of request creation
-   * @return requestDate
-  */
-  @NotNull @Valid 
-  @Schema(name = "requestDate", example = "2021-01-30T08:30Z", description = "Date of request creation", required = true)
-  public OffsetDateTime getRequestDate() {
+  public LocalDateTime getRequestDate() {
     return requestDate;
   }
 
-  public void setRequestDate(OffsetDateTime requestDate) {
+  public void setRequestDate(LocalDateTime requestDate) {
     this.requestDate = requestDate;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PermissionRequestEntity permissionRequestEntity = (PermissionRequestEntity) o;
-    return Objects.equals(this.id, permissionRequestEntity.id) &&
-        Objects.equals(this.requestingUserId, permissionRequestEntity.requestingUserId) &&
-        Objects.equals(this.requestedCardId, permissionRequestEntity.requestedCardId) &&
-        Objects.equals(this.requestState, permissionRequestEntity.requestState) &&
-        Objects.equals(this.requestDate, permissionRequestEntity.requestDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, requestingUserId, requestedCardId, requestState, requestDate);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PermissionRequestEntity {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    requestingUserId: ").append(toIndentedString(requestingUserId)).append("\n");
-    sb.append("    requestedCardId: ").append(toIndentedString(requestedCardId)).append("\n");
-    sb.append("    requestState: ").append(toIndentedString(requestState)).append("\n");
-    sb.append("    requestDate: ").append(toIndentedString(requestDate)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
   }
 }
 

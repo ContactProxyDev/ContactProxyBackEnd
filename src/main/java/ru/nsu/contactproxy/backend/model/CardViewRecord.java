@@ -1,28 +1,24 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * CardViewRecordEntity
+ * CardViewRecord
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardViewRecordEntity {
-
+public class CardViewRecord {
   @JsonProperty("userId")
-  private Integer userId;
+  private Long userId;
 
   @JsonProperty("cardId")
-  private Integer cardId;
+  private Long cardId;
 
-  public CardViewRecordEntity userId(Integer userId) {
+  public CardViewRecord userId(Long userId) {
     this.userId = userId;
     return this;
   }
@@ -33,15 +29,15 @@ public class CardViewRecordEntity {
   */
   @NotNull 
   @Schema(name = "userId", example = "123", required = true)
-  public Integer getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
-  public CardViewRecordEntity cardId(Integer cardId) {
+  public CardViewRecord cardId(Long cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -52,11 +48,11 @@ public class CardViewRecordEntity {
   */
   @NotNull 
   @Schema(name = "cardId", example = "12", required = true)
-  public Integer getCardId() {
+  public Long getCardId() {
     return cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 
@@ -68,9 +64,9 @@ public class CardViewRecordEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardViewRecordEntity cardViewRecordEntity = (CardViewRecordEntity) o;
-    return Objects.equals(this.userId, cardViewRecordEntity.userId) &&
-        Objects.equals(this.cardId, cardViewRecordEntity.cardId);
+    CardViewRecord cardViewRecord = (CardViewRecord) o;
+    return Objects.equals(this.userId, cardViewRecord.userId) &&
+        Objects.equals(this.cardId, cardViewRecord.cardId);
   }
 
   @Override
@@ -81,7 +77,7 @@ public class CardViewRecordEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardViewRecordEntity {\n");
+    sb.append("class CardViewRecord {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("}");

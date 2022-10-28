@@ -1,31 +1,29 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import javax.annotation.Generated;
 
 /**
- * RoleAttachedField
+ * RoleAttachedFieldEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
 public class RoleAttachedField {
 
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("roleId")
-  private Integer roleId;
+  private Long roleId;
 
   @JsonProperty("userFieldTypeId")
-  private Integer userFieldTypeId;
+  private Long userFieldTypeId;
 
-  public RoleAttachedField id(Integer id) {
+  public RoleAttachedField id(Long id) {
     this.id = id;
     return this;
   }
@@ -36,15 +34,15 @@ public class RoleAttachedField {
   */
   @NotNull 
   @Schema(name = "id", example = "123", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public RoleAttachedField roleId(Integer roleId) {
+  public RoleAttachedField roleId(Long roleId) {
     this.roleId = roleId;
     return this;
   }
@@ -55,15 +53,15 @@ public class RoleAttachedField {
   */
   @NotNull 
   @Schema(name = "roleId", example = "123", required = true)
-  public Integer getRoleId() {
+  public Long getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Integer roleId) {
+  public void setRoleId(Long roleId) {
     this.roleId = roleId;
   }
 
-  public RoleAttachedField userFieldTypeId(Integer userFieldTypeId) {
+  public RoleAttachedField userFieldTypeId(Long userFieldTypeId) {
     this.userFieldTypeId = userFieldTypeId;
     return this;
   }
@@ -74,11 +72,11 @@ public class RoleAttachedField {
   */
   @NotNull 
   @Schema(name = "userFieldTypeId", example = "123", required = true)
-  public Integer getUserFieldTypeId() {
+  public Long getUserFieldTypeId() {
     return userFieldTypeId;
   }
 
-  public void setUserFieldTypeId(Integer userFieldTypeId) {
+  public void setUserFieldTypeId(Long userFieldTypeId) {
     this.userFieldTypeId = userFieldTypeId;
   }
 
@@ -104,7 +102,7 @@ public class RoleAttachedField {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RoleAttachedField {\n");
+    sb.append("class RoleAttachedFieldEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    userFieldTypeId: ").append(toIndentedString(userFieldTypeId)).append("\n");

@@ -5,23 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import javax.annotation.Generated;
-
 /**
- * UserDTO
+ * UserEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class UserDTO {
-
+public class User {
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("email")
   private String email;
@@ -33,14 +27,10 @@ public class UserDTO {
   @Valid
   private List<Role> roleEntities = new ArrayList<>();
 
-  @JsonProperty("userFieldEntities")
-  @Valid
-  private List<UserField> userFieldEntities = new ArrayList<>();
-
   @JsonProperty("url")
   private String url;
 
-  public UserDTO id(Integer id) {
+  public User id(Long id) {
     this.id = id;
     return this;
   }
@@ -51,15 +41,15 @@ public class UserDTO {
   */
   @NotNull 
   @Schema(name = "id", example = "123", required = true)
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public UserDTO email(String email) {
+  public User email(String email) {
     this.email = email;
     return this;
   }
@@ -78,7 +68,7 @@ public class UserDTO {
     this.email = email;
   }
 
-  public UserDTO password(String password) {
+  public User password(String password) {
     this.password = password;
     return this;
   }
@@ -97,12 +87,12 @@ public class UserDTO {
     this.password = password;
   }
 
-  public UserDTO roles(List<Role> roleEntities) {
+  public User roles(List<Role> roleEntities) {
     this.roleEntities = roleEntities;
     return this;
   }
 
-  public UserDTO addRolesItem(Role rolesItem) {
+  public User addRolesItem(Role rolesItem) {
     this.roleEntities.add(rolesItem);
     return this;
   }
@@ -121,31 +111,7 @@ public class UserDTO {
     this.roleEntities = roleEntities;
   }
 
-  public UserDTO userFields(List<UserField> userFieldEntities) {
-    this.userFieldEntities = userFieldEntities;
-    return this;
-  }
-
-  public UserDTO addUserFieldsItem(UserField userFieldsItemEntity) {
-    this.userFieldEntities.add(userFieldsItemEntity);
-    return this;
-  }
-
-  /**
-   * Get userFieldEntities
-   * @return userFieldEntities
-  */
-  @NotNull @Valid 
-  @Schema(name = "userFieldEntities", required = true)
-  public List<UserField> getUserFields() {
-    return userFieldEntities;
-  }
-
-  public void setUserFields(List<UserField> userFieldEntities) {
-    this.userFieldEntities = userFieldEntities;
-  }
-
-  public UserDTO url(String url) {
+  public User url(String url) {
     this.url = url;
     return this;
   }
@@ -172,29 +138,27 @@ public class UserDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDTO userDTO = (UserDTO) o;
-    return Objects.equals(this.id, userDTO.id) &&
-        Objects.equals(this.email, userDTO.email) &&
-        Objects.equals(this.password, userDTO.password) &&
-        Objects.equals(this.roleEntities, userDTO.roleEntities) &&
-        Objects.equals(this.userFieldEntities, userDTO.userFieldEntities) &&
-        Objects.equals(this.url, userDTO.url);
+    User user = (User) o;
+    return Objects.equals(this.id, user.id) &&
+        Objects.equals(this.email, user.email) &&
+        Objects.equals(this.password, user.password) &&
+        Objects.equals(this.roleEntities, user.roleEntities) &&
+        Objects.equals(this.url, user.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, password, roleEntities, userFieldEntities, url);
+    return Objects.hash(id, email, password, roleEntities, url);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserDTO {\n");
+    sb.append("class UserEntity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    roleEntities: ").append(toIndentedString(roleEntities)).append("\n");
-    sb.append("    userFieldEntities: ").append(toIndentedString(userFieldEntities)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();

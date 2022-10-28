@@ -1,6 +1,6 @@
 package ru.nsu.contactproxy.backend.controllers;
 
-import ru.nsu.contactproxy.backend.repositories.entities.CardEntity;
+import ru.nsu.contactproxy.backend.model.Card;
 import ru.nsu.contactproxy.backend.model.Error;
 import ru.nsu.contactproxy.backend.util.ApiUtil;
 import ru.nsu.contactproxy.backend.model.CardDTO;
@@ -208,7 +208,7 @@ public interface CardsApi {
         tags = { "Cards" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful response with users all cards", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CardEntity.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Card.class))
             }),
             @ApiResponse(responseCode = "204", description = "Current user doesn't have any cards"),
             @ApiResponse(responseCode = "500", description = "When something went wrong", content = {
@@ -221,7 +221,7 @@ public interface CardsApi {
         value = "/cards/all/{user_id}",
         produces = { "application/json" }
     )
-    default ResponseEntity<List<CardEntity>> getUsersCards(
+    default ResponseEntity<List<Card>> getUsersCards(
         @Parameter(name = "user_id", description = "UserEntity ID", required = true) @PathVariable("user_id") Integer userId
     ) {
         getRequest().ifPresent(request -> {

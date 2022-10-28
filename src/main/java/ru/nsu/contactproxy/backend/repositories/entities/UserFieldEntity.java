@@ -1,126 +1,59 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
+import org.hibernate.validator.constraints.Length;
 
-
-import javax.annotation.Generated;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
- * UserFieldEntity
+    UserFieldEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
+@Entity
+@Table(name = "user_fields")
 public class UserFieldEntity {
+    @Id @GeneratedValue
+    @Column(name = "user_field_id")
+    private Long id;
 
-  @JsonProperty("userId")
-  private Integer userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",
+            nullable = false, updatable = false)
+    private UserEntity user;
 
-  @JsonProperty("userFieldId")
-  private Integer userFieldId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_attached_field_id",
+            nullable = false, updatable = false)
+    private RoleAttachedFieldEntity roleAttachedField;
 
-  @JsonProperty("fieldData")
-  private String fieldData;
+    @Column(name = "field_data")
+    @NotBlank(message = "Field Data can not be empty!")
+    @Length(max = 1000, message = "Field data's length must be less than 1000 characters")
+    private String fieldData;
 
-  public UserFieldEntity userId(Integer userId) {
-    this.userId = userId;
-    return this;
-  }
 
-  /**
-   * Get userId
-   * @return userId
-  */
-  @NotNull 
-  @Schema(name = "userId", example = "123", required = true)
-  public Integer getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
-
-  public UserFieldEntity userFieldId(Integer userFieldId) {
-    this.userFieldId = userFieldId;
-    return this;
-  }
-
-  /**
-   * Get userFieldId
-   * @return userFieldId
-  */
-  @NotNull 
-  @Schema(name = "userFieldId", example = "123", required = true)
-  public Integer getUserFieldId() {
-    return userFieldId;
-  }
-
-  public void setUserFieldId(Integer userFieldId) {
-    this.userFieldId = userFieldId;
-  }
-
-  public UserFieldEntity fieldData(String fieldData) {
-    this.fieldData = fieldData;
-    return this;
-  }
-
-  /**
-   * Get fieldData
-   * @return fieldData
-  */
-  @NotNull 
-  @Schema(name = "fieldData", example = "I am data", required = true)
-  public String getFieldData() {
-    return fieldData;
-  }
-
-  public void setFieldData(String fieldData) {
-    this.fieldData = fieldData;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public Long getId() {
+        return id;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    UserFieldEntity userFieldEntity = (UserFieldEntity) o;
-    return Objects.equals(this.userId, userFieldEntity.userId) &&
-        Objects.equals(this.userFieldId, userFieldEntity.userFieldId) &&
-        Objects.equals(this.fieldData, userFieldEntity.fieldData);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(userId, userFieldId, fieldData);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class UserFieldEntity {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    userFieldId: ").append(toIndentedString(userFieldId)).append("\n");
-    sb.append("    fieldData: ").append(toIndentedString(fieldData)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    public String getFieldData() {
+        return fieldData;
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    public void setFieldData(String fieldData) {
+        this.fieldData = fieldData;
+    }
+
+    public RoleAttachedFieldEntity getRoleAttachedField() {
+        return roleAttachedField;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
 }
-

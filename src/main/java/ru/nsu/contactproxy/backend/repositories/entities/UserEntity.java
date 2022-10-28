@@ -1,70 +1,94 @@
 package ru.nsu.contactproxy.backend.repositories.entities;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import javax.annotation.Generated;
+import java.util.Set;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * UserEntity
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
+@Entity
+@Table(name = "users")
 public class UserEntity {
+  @Id @GeneratedValue
+  @Column(name = "user_id")
+  private Long id;
 
-  @JsonProperty("id")
-  private Integer id;
-
-  @JsonProperty("email")
+  @Column(name = "email")
+  @NotBlank(message = "Email can not be empty!")
+  @Length(max = 255, message = "Email's length must be less than 255 characters")
   private String email;
 
-  @JsonProperty("password")
+  @Column(name = "password")
+  @NotBlank(message = "Password can not be empty!")
+  @Length(max = 30, message = "Passwords's length must be less than 30 characters")
   private String password;
 
-  @JsonProperty("roleEntities")
-  @Valid
-  private List<RoleEntity> roleEntities = new ArrayList<>();
+  @ManyToMany
+  @JoinTable(
+          name = "users_roles",
+          joinColumns = @JoinColumn(name = "user_id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "role_id",
+                  nullable = false, updatable = false)
+  )
+  private Set<RoleEntity> roles = new HashSet<>();
 
-  @JsonProperty("url")
+  @Column(name = "specific_url")
+  @Length(max = 255, message = "Specific URL's length must be less than 255 characters")
   private String url;
 
-  public UserEntity id(Integer id) {
-    this.id = id;
-    return this;
-  }
+  @ManyToMany
+  @JoinTable(
+          name = "card_views",
+          joinColumns = @JoinColumn(name = "user_id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> viewedCards = new HashSet<>();
 
-  /**
-   * Get id
-   * @return id
-  */
-  @NotNull 
-  @Schema(name = "id", example = "123", required = true)
-  public Integer getId() {
+  @ManyToMany
+  @JoinTable(
+          name = "saved_cards",
+          joinColumns = @JoinColumn(name = "user_id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> savedCards = new HashSet<>();
+
+  @ManyToMany
+  @JoinTable(
+          name = "card_user_permission",
+          joinColumns = @JoinColumn(name = "user_id",
+                  nullable = false, updatable = false),
+          inverseJoinColumns = @JoinColumn(name = "card_id",
+                  nullable = false, updatable = false)
+  )
+  private Set<CardEntity> cardPermissions = new HashSet<>();
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "user")
+  private Set<UserFieldEntity> userFields = new HashSet<>();
+
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public UserEntity email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  */
-  @NotNull 
-  @Schema(name = "email", example = "i.ivanov@g.nsu.ru", required = true)
   public String getEmail() {
     return email;
   }
@@ -73,17 +97,6 @@ public class UserEntity {
     this.email = email;
   }
 
-  public UserEntity password(String password) {
-    this.password = password;
-    return this;
-  }
-
-  /**
-   * Get password
-   * @return password
-  */
-  @NotNull 
-  @Schema(name = "password", example = "password", required = true)
   public String getPassword() {
     return password;
   }
@@ -92,41 +105,6 @@ public class UserEntity {
     this.password = password;
   }
 
-  public UserEntity roles(List<RoleEntity> roleEntities) {
-    this.roleEntities = roleEntities;
-    return this;
-  }
-
-  public UserEntity addRolesItem(RoleEntity rolesItem) {
-    this.roleEntities.add(rolesItem);
-    return this;
-  }
-
-  /**
-   * Get roleEntities
-   * @return roleEntities
-  */
-  @NotNull @Valid 
-  @Schema(name = "roleEntities", required = true)
-  public List<RoleEntity> getRoles() {
-    return roleEntities;
-  }
-
-  public void setRoles(List<RoleEntity> roleEntities) {
-    this.roleEntities = roleEntities;
-  }
-
-  public UserEntity url(String url) {
-    this.url = url;
-    return this;
-  }
-
-  /**
-   * Get url
-   * @return url
-  */
-  
-  @Schema(name = "url", example = "krasivyi-url", required = false)
   public String getUrl() {
     return url;
   }
@@ -135,49 +113,24 @@ public class UserEntity {
     this.url = url;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    UserEntity userEntity = (UserEntity) o;
-    return Objects.equals(this.id, userEntity.id) &&
-        Objects.equals(this.email, userEntity.email) &&
-        Objects.equals(this.password, userEntity.password) &&
-        Objects.equals(this.roleEntities, userEntity.roleEntities) &&
-        Objects.equals(this.url, userEntity.url);
+  public Set<RoleEntity> getRoles() {
+    return roles;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, email, password, roleEntities, url);
+  public Set<CardEntity> getViewedCards() {
+    return viewedCards;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class UserEntity {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    roleEntities: ").append(toIndentedString(roleEntities)).append("\n");
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
-    sb.append("}");
-    return sb.toString();
+  public Set<CardEntity> getSavedCards() {
+    return savedCards;
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  public Set<CardEntity> getCardPermissions() {
+    return cardPermissions;
+  }
+
+  public Set<UserFieldEntity> getUserFields() {
+    return userFields;
   }
 }
 
