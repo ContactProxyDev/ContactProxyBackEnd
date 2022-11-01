@@ -1,16 +1,13 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.repositories.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * UserEntity

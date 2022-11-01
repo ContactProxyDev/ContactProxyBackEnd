@@ -1,24 +1,23 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * RequestStateEntity
+ * RoleDTO
  */
-public class RequestState {
+
+public class RoleDTO {
 
   @JsonProperty("id")
-  private Long id;
+  private Integer id;
 
-  @JsonProperty("stateName")
-  private String stateName;
+  @JsonProperty("name")
+  private String name;
 
-  public RequestState id(Long id) {
+  public RoleDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -27,33 +26,33 @@ public class RequestState {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", example = "12435", required = true)
-  public Long getId() {
+  
+  @Schema(name = "id", example = "123", required = false)
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public RequestState stateName(String stateName) {
-    this.stateName = stateName;
+  public RoleDTO name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get stateName
-   * @return stateName
+   * Get name
+   * @return name
   */
   @NotNull 
-  @Schema(name = "stateName", required = true)
-  public String getStateName() {
-    return stateName;
+  @Schema(name = "name", example = "Admin", required = true)
+  public String getName() {
+    return name;
   }
 
-  public void setStateName(String stateName) {
-    this.stateName = stateName;
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -64,22 +63,22 @@ public class RequestState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RequestState requestState = (RequestState) o;
-    return Objects.equals(this.id, requestState.id) &&
-        Objects.equals(this.stateName, requestState.stateName);
+    RoleDTO roleDTO = (RoleDTO) o;
+    return Objects.equals(this.id, roleDTO.id) &&
+        Objects.equals(this.name, roleDTO.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, stateName);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestStateEntity {\n");
+    sb.append("class RoleDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    stateName: ").append(toIndentedString(stateName)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

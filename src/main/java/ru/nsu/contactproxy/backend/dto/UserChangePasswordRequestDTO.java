@@ -1,24 +1,24 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 /**
- * RoleEntity
+ * UserChangePasswordRequestDTO
  */
-public class Role {
+
+public class UserChangePasswordRequestDTO {
 
   @JsonProperty("id")
-  private Long id;
+  private Integer id;
 
-  @JsonProperty("name")
-  private String name;
+  @JsonProperty("password")
+  private String password;
 
-  public Role id(Long id) {
+  public UserChangePasswordRequestDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -29,31 +29,31 @@ public class Role {
   */
   @NotNull 
   @Schema(name = "id", example = "123", required = true)
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public Role name(String name) {
-    this.name = name;
+  public UserChangePasswordRequestDTO password(String password) {
+    this.password = password;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get password
+   * @return password
   */
   @NotNull 
-  @Schema(name = "name", example = "BRO", required = true)
-  public String getName() {
-    return name;
+  @Schema(name = "password", example = "newPassword", required = true)
+  public String getPassword() {
+    return password;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   @Override
@@ -64,22 +64,22 @@ public class Role {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Role role = (Role) o;
-    return Objects.equals(this.id, role.id) &&
-        Objects.equals(this.name, role.name);
+    UserChangePasswordRequestDTO userChangePasswordRequestDTO = (UserChangePasswordRequestDTO) o;
+    return Objects.equals(this.id, userChangePasswordRequestDTO.id) &&
+        Objects.equals(this.password, userChangePasswordRequestDTO.password);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, password);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RoleEntity {\n");
+    sb.append("class UserChangePasswordRequestDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
     return sb.toString();
   }

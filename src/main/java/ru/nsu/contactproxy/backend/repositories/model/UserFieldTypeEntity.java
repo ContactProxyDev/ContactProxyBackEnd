@@ -1,4 +1,4 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.repositories.model;
 
 import org.hibernate.validator.constraints.Length;
 

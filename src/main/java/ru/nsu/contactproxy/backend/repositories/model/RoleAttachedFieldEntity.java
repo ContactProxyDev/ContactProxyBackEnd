@@ -1,9 +1,8 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.repositories.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 

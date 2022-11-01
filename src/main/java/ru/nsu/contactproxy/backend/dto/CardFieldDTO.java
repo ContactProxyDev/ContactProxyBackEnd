@@ -1,22 +1,24 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
+import ru.nsu.contactproxy.backend.dto.CardFieldTypeDTO;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 /**
- * CardFieldEntity
+ * CardFieldDTO
  */
-public class CardField {
+
+public class CardFieldDTO {
 
   @JsonProperty("id")
-  private Long id;
+  private Integer id;
 
   @JsonProperty("cardId")
-  private Long cardId;
+  private Integer cardId;
 
   @JsonProperty("fieldName")
   private String fieldName;
@@ -24,10 +26,10 @@ public class CardField {
   @JsonProperty("fieldData")
   private String fieldData;
 
-  @JsonProperty("cardFieldTypeId")
-  private String cardFieldTypeId;
+  @JsonProperty("cardFieldType")
+  private CardFieldTypeDTO cardFieldType;
 
-  public CardField id(Long id) {
+  public CardFieldDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -36,17 +38,17 @@ public class CardField {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", example = "12", required = true)
-  public Long getId() {
+  
+  @Schema(name = "id", example = "12", required = false)
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public CardField cardId(Long cardId) {
+  public CardFieldDTO cardId(Integer cardId) {
     this.cardId = cardId;
     return this;
   }
@@ -57,15 +59,15 @@ public class CardField {
   */
   @NotNull 
   @Schema(name = "cardId", example = "12", required = true)
-  public Long getCardId() {
+  public Integer getCardId() {
     return cardId;
   }
 
-  public void setCardId(Long cardId) {
+  public void setCardId(Integer cardId) {
     this.cardId = cardId;
   }
 
-  public CardField fieldName(String fieldName) {
+  public CardFieldDTO fieldName(String fieldName) {
     this.fieldName = fieldName;
     return this;
   }
@@ -75,7 +77,7 @@ public class CardField {
    * @return fieldName
   */
   @NotNull 
-  @Schema(name = "fieldName", example = "card field", description = "Specific card's field name", required = true)
+  @Schema(name = "fieldName", example = "email", description = "Specific card's field name", required = true)
   public String getFieldName() {
     return fieldName;
   }
@@ -84,7 +86,7 @@ public class CardField {
     this.fieldName = fieldName;
   }
 
-  public CardField fieldData(String fieldData) {
+  public CardFieldDTO fieldData(String fieldData) {
     this.fieldData = fieldData;
     return this;
   }
@@ -94,7 +96,7 @@ public class CardField {
    * @return fieldData
   */
   @NotNull 
-  @Schema(name = "fieldData", example = "I am data", required = true)
+  @Schema(name = "fieldData", example = "example@email.com", required = true)
   public String getFieldData() {
     return fieldData;
   }
@@ -103,23 +105,23 @@ public class CardField {
     this.fieldData = fieldData;
   }
 
-  public CardField cardFieldTypeId(String cardFieldTypeId) {
-    this.cardFieldTypeId = cardFieldTypeId;
+  public CardFieldDTO cardFieldType(CardFieldTypeDTO cardFieldType) {
+    this.cardFieldType = cardFieldType;
     return this;
   }
 
   /**
-   * Get cardFieldTypeId
-   * @return cardFieldTypeId
+   * Get cardFieldType
+   * @return cardFieldType
   */
-  @NotNull 
-  @Schema(name = "cardFieldTypeId", example = "field type", required = true)
-  public String getCardFieldTypeId() {
-    return cardFieldTypeId;
+  @NotNull @Valid 
+  @Schema(name = "cardFieldType", required = true)
+  public CardFieldTypeDTO getCardFieldType() {
+    return cardFieldType;
   }
 
-  public void setCardFieldTypeId(String cardFieldTypeId) {
-    this.cardFieldTypeId = cardFieldTypeId;
+  public void setCardFieldType(CardFieldTypeDTO cardFieldType) {
+    this.cardFieldType = cardFieldType;
   }
 
   @Override
@@ -130,28 +132,28 @@ public class CardField {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardField cardField = (CardField) o;
-    return Objects.equals(this.id, cardField.id) &&
-        Objects.equals(this.cardId, cardField.cardId) &&
-        Objects.equals(this.fieldName, cardField.fieldName) &&
-        Objects.equals(this.fieldData, cardField.fieldData) &&
-        Objects.equals(this.cardFieldTypeId, cardField.cardFieldTypeId);
+    CardFieldDTO cardFieldDTO = (CardFieldDTO) o;
+    return Objects.equals(this.id, cardFieldDTO.id) &&
+        Objects.equals(this.cardId, cardFieldDTO.cardId) &&
+        Objects.equals(this.fieldName, cardFieldDTO.fieldName) &&
+        Objects.equals(this.fieldData, cardFieldDTO.fieldData) &&
+        Objects.equals(this.cardFieldType, cardFieldDTO.cardFieldType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cardId, fieldName, fieldData, cardFieldTypeId);
+    return Objects.hash(id, cardId, fieldName, fieldData, cardFieldType);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardFieldEntity {\n");
+    sb.append("class CardFieldDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    cardId: ").append(toIndentedString(cardId)).append("\n");
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
     sb.append("    fieldData: ").append(toIndentedString(fieldData)).append("\n");
-    sb.append("    cardFieldTypeId: ").append(toIndentedString(cardFieldTypeId)).append("\n");
+    sb.append("    cardFieldType: ").append(toIndentedString(cardFieldType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

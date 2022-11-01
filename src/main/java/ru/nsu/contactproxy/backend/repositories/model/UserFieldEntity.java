@@ -1,11 +1,10 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.repositories.model;
 
 
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
     UserFieldEntity
