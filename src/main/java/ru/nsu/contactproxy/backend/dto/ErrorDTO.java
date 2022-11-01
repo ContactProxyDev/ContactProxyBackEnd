@@ -1,20 +1,16 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import javax.annotation.Generated;
-
 /**
- * Error
+ * ErrorDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class Error {
+public class ErrorDTO {
 
   @JsonProperty("name")
   private String name;
@@ -22,7 +18,7 @@ public class Error {
   @JsonProperty("description")
   private String description;
 
-  public Error name(String name) {
+  public ErrorDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -41,7 +37,7 @@ public class Error {
     this.name = name;
   }
 
-  public Error description(String description) {
+  public ErrorDTO description(String description) {
     this.description = description;
     return this;
   }
@@ -68,9 +64,9 @@ public class Error {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error error = (Error) o;
-    return Objects.equals(this.name, error.name) &&
-        Objects.equals(this.description, error.description);
+    ErrorDTO errorDTO = (ErrorDTO) o;
+    return Objects.equals(this.name, errorDTO.name) &&
+        Objects.equals(this.description, errorDTO.description);
   }
 
   @Override
@@ -81,7 +77,7 @@ public class Error {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error {\n");
+    sb.append("class ErrorDTO {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");

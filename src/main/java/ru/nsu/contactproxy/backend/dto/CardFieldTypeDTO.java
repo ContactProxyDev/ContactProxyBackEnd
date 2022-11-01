@@ -1,19 +1,18 @@
-package ru.nsu.contactproxy.backend.model;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 /**
- * CardFieldTypeEntity
+ * CardFieldTypeDTO
  */
-public class CardFieldType {
+
+public class CardFieldTypeDTO {
 
   @JsonProperty("id")
-  private Long id;
+  private Integer id;
 
   @JsonProperty("name")
   private String name;
@@ -24,7 +23,7 @@ public class CardFieldType {
   @JsonProperty("template")
   private String template;
 
-  public CardFieldType id(Long id) {
+  public CardFieldTypeDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -33,17 +32,17 @@ public class CardFieldType {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", example = "123", required = true)
-  public Long getId() {
+  
+  @Schema(name = "id", example = "123", required = false)
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public CardFieldType name(String name) {
+  public CardFieldTypeDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -52,8 +51,8 @@ public class CardFieldType {
    * Get name
    * @return name
   */
-  @NotNull 
-  @Schema(name = "name", example = "field-name", required = true)
+  
+  @Schema(name = "name", example = "field-name", required = false)
   public String getName() {
     return name;
   }
@@ -62,7 +61,7 @@ public class CardFieldType {
     this.name = name;
   }
 
-  public CardFieldType isCopyable(Boolean isCopyable) {
+  public CardFieldTypeDTO isCopyable(Boolean isCopyable) {
     this.isCopyable = isCopyable;
     return this;
   }
@@ -81,7 +80,7 @@ public class CardFieldType {
     this.isCopyable = isCopyable;
   }
 
-  public CardFieldType template(String template) {
+  public CardFieldTypeDTO template(String template) {
     this.template = template;
     return this;
   }
@@ -90,8 +89,8 @@ public class CardFieldType {
    * Get template
    * @return template
   */
-  @NotNull 
-  @Schema(name = "template", example = "specific-template", required = true)
+  
+  @Schema(name = "template", example = "specific-template", required = false)
   public String getTemplate() {
     return template;
   }
@@ -108,11 +107,11 @@ public class CardFieldType {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardFieldType cardFieldType = (CardFieldType) o;
-    return Objects.equals(this.id, cardFieldType.id) &&
-        Objects.equals(this.name, cardFieldType.name) &&
-        Objects.equals(this.isCopyable, cardFieldType.isCopyable) &&
-        Objects.equals(this.template, cardFieldType.template);
+    CardFieldTypeDTO cardFieldTypeDTO = (CardFieldTypeDTO) o;
+    return Objects.equals(this.id, cardFieldTypeDTO.id) &&
+        Objects.equals(this.name, cardFieldTypeDTO.name) &&
+        Objects.equals(this.isCopyable, cardFieldTypeDTO.isCopyable) &&
+        Objects.equals(this.template, cardFieldTypeDTO.template);
   }
 
   @Override
@@ -123,7 +122,7 @@ public class CardFieldType {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardFieldTypeEntity {\n");
+    sb.append("class CardFieldTypeDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    isCopyable: ").append(toIndentedString(isCopyable)).append("\n");
