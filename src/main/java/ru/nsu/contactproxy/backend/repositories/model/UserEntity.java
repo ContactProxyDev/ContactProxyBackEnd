@@ -19,12 +19,12 @@ public class UserEntity {
   @Column(name = "user_id")
   private Long id;
 
-  @Column(name = "name")
+  @Column(name = "firstname")
   @NotBlank(message = "Firstname can not be empty!")
   @Length(max = 255, message = "Firstname's length must be less than 255 characters")
   private String firstname;
 
-  @Column(name = "name")
+  @Column(name = "surname")
   @NotBlank(message = "Surname can not be empty!")
   @Length(max = 255, message = "Surname's length must be less than 255 characters")
   private String surname;
