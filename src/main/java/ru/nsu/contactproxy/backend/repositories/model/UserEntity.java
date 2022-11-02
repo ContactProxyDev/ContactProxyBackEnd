@@ -19,6 +19,16 @@ public class UserEntity {
   @Column(name = "user_id")
   private Long id;
 
+  @Column(name = "firstname")
+  @NotBlank(message = "Firstname can not be empty!")
+  @Length(max = 255, message = "Firstname's length must be less than 255 characters")
+  private String firstname;
+
+  @Column(name = "surname")
+  @NotBlank(message = "Surname can not be empty!")
+  @Length(max = 255, message = "Surname's length must be less than 255 characters")
+  private String surname;
+
   @Column(name = "email")
   @NotBlank(message = "Email can not be empty!")
   @Length(max = 255, message = "Email's length must be less than 255 characters")
@@ -73,10 +83,6 @@ public class UserEntity {
   )
   private Set<CardEntity> cardPermissions = new HashSet<>();
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "user")
-  private Set<UserFieldEntity> userFields = new HashSet<>();
-
 
   public Long getId() {
     return id;
@@ -126,8 +132,20 @@ public class UserEntity {
     return cardPermissions;
   }
 
-  public Set<UserFieldEntity> getUserFields() {
-    return userFields;
+  public String getFirstname() {
+    return firstname;
+  }
+
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
   }
 }
 
