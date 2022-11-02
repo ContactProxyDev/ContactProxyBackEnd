@@ -25,10 +25,6 @@ public class RoleEntity {
   private String name;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "attachedRole")
-  private Set<RoleAttachedFieldEntity> roleAttachedFields = new HashSet<>();
-
-  @JsonIgnore
   @ManyToMany(mappedBy = "roles")
   private Set<UserEntity> users = new HashSet<>();
 
@@ -47,10 +43,6 @@ public class RoleEntity {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public Set<RoleAttachedFieldEntity> getRoleAttachedFields() {
-    return roleAttachedFields;
   }
 
   public Set<UserEntity> getUsers() {
