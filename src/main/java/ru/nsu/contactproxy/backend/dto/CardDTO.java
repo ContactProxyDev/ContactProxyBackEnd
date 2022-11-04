@@ -1,24 +1,22 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import ru.nsu.contactproxy.backend.dto.CardFieldDTO;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import javax.annotation.Generated;
-
 /**
- * CardEntity
+ * CardDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class CardEntity {
+public class CardDTO {
 
   @JsonProperty("id")
   private Integer id;
@@ -28,6 +26,10 @@ public class CardEntity {
 
   @JsonProperty("name")
   private String name;
+
+  @JsonProperty("cardFields")
+  @Valid
+  private List<CardFieldDTO> cardFields = new ArrayList<>();
 
   @JsonProperty("creationDate")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -55,10 +57,7 @@ public class CardEntity {
   @JsonProperty("isOnlyWithPermission")
   private Boolean isOnlyWithPermission;
 
-  @JsonProperty("isDeleted")
-  private Boolean isDeleted;
-
-  public CardEntity id(Integer id) {
+  public CardDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -67,8 +66,8 @@ public class CardEntity {
    * Get id
    * @return id
   */
-  @NotNull 
-  @Schema(name = "id", example = "12", required = true)
+  
+  @Schema(name = "id", example = "12", required = false)
   public Integer getId() {
     return id;
   }
@@ -77,7 +76,7 @@ public class CardEntity {
     this.id = id;
   }
 
-  public CardEntity ownerId(Integer ownerId) {
+  public CardDTO ownerId(Integer ownerId) {
     this.ownerId = ownerId;
     return this;
   }
@@ -86,8 +85,8 @@ public class CardEntity {
    * Get ownerId
    * @return ownerId
   */
-  @NotNull 
-  @Schema(name = "ownerId", example = "123", required = true)
+  
+  @Schema(name = "ownerId", example = "123", required = false)
   public Integer getOwnerId() {
     return ownerId;
   }
@@ -96,7 +95,7 @@ public class CardEntity {
     this.ownerId = ownerId;
   }
 
-  public CardEntity name(String name) {
+  public CardDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -106,7 +105,7 @@ public class CardEntity {
    * @return name
   */
   @NotNull 
-  @Schema(name = "name", example = "card", required = true)
+  @Schema(name = "name", example = "MyCard", required = true)
   public String getName() {
     return name;
   }
@@ -115,7 +114,31 @@ public class CardEntity {
     this.name = name;
   }
 
-  public CardEntity creationDate(OffsetDateTime creationDate) {
+  public CardDTO cardFields(List<CardFieldDTO> cardFields) {
+    this.cardFields = cardFields;
+    return this;
+  }
+
+  public CardDTO addCardFieldsItem(CardFieldDTO cardFieldsItem) {
+    this.cardFields.add(cardFieldsItem);
+    return this;
+  }
+
+  /**
+   * Get cardFields
+   * @return cardFields
+  */
+  @NotNull @Valid 
+  @Schema(name = "cardFields", required = true)
+  public List<CardFieldDTO> getCardFields() {
+    return cardFields;
+  }
+
+  public void setCardFields(List<CardFieldDTO> cardFields) {
+    this.cardFields = cardFields;
+  }
+
+  public CardDTO creationDate(OffsetDateTime creationDate) {
     this.creationDate = creationDate;
     return this;
   }
@@ -124,8 +147,8 @@ public class CardEntity {
    * Date of card creation
    * @return creationDate
   */
-  @NotNull @Valid 
-  @Schema(name = "creationDate", example = "2021-01-30T08:30Z", description = "Date of card creation", required = true)
+  @Valid 
+  @Schema(name = "creationDate", example = "2021-01-30T08:30Z", description = "Date of card creation", required = false)
   public OffsetDateTime getCreationDate() {
     return creationDate;
   }
@@ -134,7 +157,7 @@ public class CardEntity {
     this.creationDate = creationDate;
   }
 
-  public CardEntity viewCounter(Integer viewCounter) {
+  public CardDTO viewCounter(Integer viewCounter) {
     this.viewCounter = viewCounter;
     return this;
   }
@@ -143,8 +166,8 @@ public class CardEntity {
    * Get viewCounter
    * @return viewCounter
   */
-  @NotNull 
-  @Schema(name = "viewCounter", example = "10", required = true)
+  
+  @Schema(name = "viewCounter", example = "10", required = false)
   public Integer getViewCounter() {
     return viewCounter;
   }
@@ -153,7 +176,7 @@ public class CardEntity {
     this.viewCounter = viewCounter;
   }
 
-  public CardEntity maxViewCount(Integer maxViewCount) {
+  public CardDTO maxViewCount(Integer maxViewCount) {
     this.maxViewCount = maxViewCount;
     return this;
   }
@@ -172,7 +195,7 @@ public class CardEntity {
     this.maxViewCount = maxViewCount;
   }
 
-  public CardEntity maxViewDate(OffsetDateTime maxViewDate) {
+  public CardDTO maxViewDate(OffsetDateTime maxViewDate) {
     this.maxViewDate = maxViewDate;
     return this;
   }
@@ -191,7 +214,7 @@ public class CardEntity {
     this.maxViewDate = maxViewDate;
   }
 
-  public CardEntity url(String url) {
+  public CardDTO url(String url) {
     this.url = url;
     return this;
   }
@@ -201,7 +224,7 @@ public class CardEntity {
    * @return url
   */
   
-  @Schema(name = "url", example = "krasivyi-url", required = false)
+  @Schema(name = "url", example = "MyCardURL", required = false)
   public String getUrl() {
     return url;
   }
@@ -210,7 +233,7 @@ public class CardEntity {
     this.url = url;
   }
 
-  public CardEntity isVisible(Boolean isVisible) {
+  public CardDTO isVisible(Boolean isVisible) {
     this.isVisible = isVisible;
     return this;
   }
@@ -219,8 +242,8 @@ public class CardEntity {
    * Get isVisible
    * @return isVisible
   */
-  @NotNull 
-  @Schema(name = "isVisible", required = true)
+  
+  @Schema(name = "isVisible", required = false)
   public Boolean getIsVisible() {
     return isVisible;
   }
@@ -229,7 +252,7 @@ public class CardEntity {
     this.isVisible = isVisible;
   }
 
-  public CardEntity isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
+  public CardDTO isOnlyForAuthorizedUsers(Boolean isOnlyForAuthorizedUsers) {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
     return this;
   }
@@ -248,7 +271,7 @@ public class CardEntity {
     this.isOnlyForAuthorizedUsers = isOnlyForAuthorizedUsers;
   }
 
-  public CardEntity isOnlyWithPermission(Boolean isOnlyWithPermission) {
+  public CardDTO isOnlyWithPermission(Boolean isOnlyWithPermission) {
     this.isOnlyWithPermission = isOnlyWithPermission;
     return this;
   }
@@ -267,25 +290,6 @@ public class CardEntity {
     this.isOnlyWithPermission = isOnlyWithPermission;
   }
 
-  public CardEntity isDeleted(Boolean isDeleted) {
-    this.isDeleted = isDeleted;
-    return this;
-  }
-
-  /**
-   * Get isDeleted
-   * @return isDeleted
-  */
-  @NotNull 
-  @Schema(name = "isDeleted", required = true)
-  public Boolean getIsDeleted() {
-    return isDeleted;
-  }
-
-  public void setIsDeleted(Boolean isDeleted) {
-    this.isDeleted = isDeleted;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -294,33 +298,34 @@ public class CardEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CardEntity cardEntity = (CardEntity) o;
-    return Objects.equals(this.id, cardEntity.id) &&
-        Objects.equals(this.ownerId, cardEntity.ownerId) &&
-        Objects.equals(this.name, cardEntity.name) &&
-        Objects.equals(this.creationDate, cardEntity.creationDate) &&
-        Objects.equals(this.viewCounter, cardEntity.viewCounter) &&
-        Objects.equals(this.maxViewCount, cardEntity.maxViewCount) &&
-        Objects.equals(this.maxViewDate, cardEntity.maxViewDate) &&
-        Objects.equals(this.url, cardEntity.url) &&
-        Objects.equals(this.isVisible, cardEntity.isVisible) &&
-        Objects.equals(this.isOnlyForAuthorizedUsers, cardEntity.isOnlyForAuthorizedUsers) &&
-        Objects.equals(this.isOnlyWithPermission, cardEntity.isOnlyWithPermission) &&
-        Objects.equals(this.isDeleted, cardEntity.isDeleted);
+    CardDTO cardDTO = (CardDTO) o;
+    return Objects.equals(this.id, cardDTO.id) &&
+        Objects.equals(this.ownerId, cardDTO.ownerId) &&
+        Objects.equals(this.name, cardDTO.name) &&
+        Objects.equals(this.cardFields, cardDTO.cardFields) &&
+        Objects.equals(this.creationDate, cardDTO.creationDate) &&
+        Objects.equals(this.viewCounter, cardDTO.viewCounter) &&
+        Objects.equals(this.maxViewCount, cardDTO.maxViewCount) &&
+        Objects.equals(this.maxViewDate, cardDTO.maxViewDate) &&
+        Objects.equals(this.url, cardDTO.url) &&
+        Objects.equals(this.isVisible, cardDTO.isVisible) &&
+        Objects.equals(this.isOnlyForAuthorizedUsers, cardDTO.isOnlyForAuthorizedUsers) &&
+        Objects.equals(this.isOnlyWithPermission, cardDTO.isOnlyWithPermission);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ownerId, name, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission, isDeleted);
+    return Objects.hash(id, ownerId, name, cardFields, creationDate, viewCounter, maxViewCount, maxViewDate, url, isVisible, isOnlyForAuthorizedUsers, isOnlyWithPermission);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CardEntity {\n");
+    sb.append("class CardDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    cardFields: ").append(toIndentedString(cardFields)).append("\n");
     sb.append("    creationDate: ").append(toIndentedString(creationDate)).append("\n");
     sb.append("    viewCounter: ").append(toIndentedString(viewCounter)).append("\n");
     sb.append("    maxViewCount: ").append(toIndentedString(maxViewCount)).append("\n");
@@ -329,7 +334,6 @@ public class CardEntity {
     sb.append("    isVisible: ").append(toIndentedString(isVisible)).append("\n");
     sb.append("    isOnlyForAuthorizedUsers: ").append(toIndentedString(isOnlyForAuthorizedUsers)).append("\n");
     sb.append("    isOnlyWithPermission: ").append(toIndentedString(isOnlyWithPermission)).append("\n");
-    sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
     sb.append("}");
     return sb.toString();
   }

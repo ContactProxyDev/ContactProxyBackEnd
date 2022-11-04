@@ -7,12 +7,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 import java.util.Optional;
 
 @Controller
-public class CardsApiController implements CardsApi {
+public class AuthorizeApiController implements AuthorizeApi {
 
     private final NativeWebRequest request;
 
     @Autowired
-    public CardsApiController(NativeWebRequest request) {
+    public AuthorizeApiController(NativeWebRequest request) {
         this.request = request;
     }
 

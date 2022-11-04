@@ -1,20 +1,16 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import javax.annotation.Generated;
-
 /**
- * RoleEntity
+ * UserDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class RoleEntity {
+public class UserDTO {
 
   @JsonProperty("id")
   private Integer id;
@@ -22,7 +18,13 @@ public class RoleEntity {
   @JsonProperty("name")
   private String name;
 
-  public RoleEntity id(Integer id) {
+  @JsonProperty("surname")
+  private String surname;
+
+  @JsonProperty("url")
+  private String url;
+
+  public UserDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -41,7 +43,7 @@ public class RoleEntity {
     this.id = id;
   }
 
-  public RoleEntity name(String name) {
+  public UserDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -50,14 +52,52 @@ public class RoleEntity {
    * Get name
    * @return name
   */
-  @NotNull 
-  @Schema(name = "name", example = "BRO", required = true)
+  
+  @Schema(name = "name", example = "Ivan", required = false)
   public String getName() {
     return name;
   }
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public UserDTO surname(String surname) {
+    this.surname = surname;
+    return this;
+  }
+
+  /**
+   * Get surname
+   * @return surname
+  */
+  
+  @Schema(name = "surname", example = "Ivanov", required = false)
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
+
+  public UserDTO url(String url) {
+    this.url = url;
+    return this;
+  }
+
+  /**
+   * Get url
+   * @return url
+  */
+  
+  @Schema(name = "url", example = "id123", required = false)
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
   }
 
   @Override
@@ -68,22 +108,26 @@ public class RoleEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RoleEntity roleEntity = (RoleEntity) o;
-    return Objects.equals(this.id, roleEntity.id) &&
-        Objects.equals(this.name, roleEntity.name);
+    UserDTO userDTO = (UserDTO) o;
+    return Objects.equals(this.id, userDTO.id) &&
+        Objects.equals(this.name, userDTO.name) &&
+        Objects.equals(this.surname, userDTO.surname) &&
+        Objects.equals(this.url, userDTO.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, surname, url);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RoleEntity {\n");
+    sb.append("class UserDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
   }

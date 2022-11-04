@@ -1,28 +1,24 @@
-package ru.nsu.contactproxy.backend.repositories.entities;
+package ru.nsu.contactproxy.backend.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import javax.annotation.Generated;
-
 /**
- * RequestStateEntity
+ * UserChangePasswordRequestDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-10-13T19:31:56.564560200+07:00[Asia/Novosibirsk]")
-public class RequestStateEntity {
+public class UserChangePasswordRequestDTO {
 
   @JsonProperty("id")
   private Integer id;
 
-  @JsonProperty("stateName")
-  private String stateName;
+  @JsonProperty("password")
+  private String password;
 
-  public RequestStateEntity id(Integer id) {
+  public UserChangePasswordRequestDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -32,7 +28,7 @@ public class RequestStateEntity {
    * @return id
   */
   @NotNull 
-  @Schema(name = "id", example = "12435", required = true)
+  @Schema(name = "id", example = "123", required = true)
   public Integer getId() {
     return id;
   }
@@ -41,23 +37,23 @@ public class RequestStateEntity {
     this.id = id;
   }
 
-  public RequestStateEntity stateName(String stateName) {
-    this.stateName = stateName;
+  public UserChangePasswordRequestDTO password(String password) {
+    this.password = password;
     return this;
   }
 
   /**
-   * Get stateName
-   * @return stateName
+   * Get password
+   * @return password
   */
   @NotNull 
-  @Schema(name = "stateName", required = true)
-  public String getStateName() {
-    return stateName;
+  @Schema(name = "password", example = "newPassword", required = true)
+  public String getPassword() {
+    return password;
   }
 
-  public void setStateName(String stateName) {
-    this.stateName = stateName;
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   @Override
@@ -68,22 +64,22 @@ public class RequestStateEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RequestStateEntity requestStateEntity = (RequestStateEntity) o;
-    return Objects.equals(this.id, requestStateEntity.id) &&
-        Objects.equals(this.stateName, requestStateEntity.stateName);
+    UserChangePasswordRequestDTO userChangePasswordRequestDTO = (UserChangePasswordRequestDTO) o;
+    return Objects.equals(this.id, userChangePasswordRequestDTO.id) &&
+        Objects.equals(this.password, userChangePasswordRequestDTO.password);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, stateName);
+    return Objects.hash(id, password);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestStateEntity {\n");
+    sb.append("class UserChangePasswordRequestDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    stateName: ").append(toIndentedString(stateName)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
     return sb.toString();
   }
