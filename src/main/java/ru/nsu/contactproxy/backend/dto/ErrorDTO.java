@@ -18,6 +18,13 @@ public class ErrorDTO {
   @JsonProperty("description")
   private String description;
 
+  public ErrorDTO() {}
+
+  public ErrorDTO(String name, String description) {
+    this.name = name;
+    this.description = description;
+  }
+
   public ErrorDTO name(String name) {
     this.name = name;
     return this;

@@ -111,10 +111,10 @@ public interface AuthorizeApi {
     /**
      * POST /authorize/login : Method to log in
      *
-     * @param userLoginRequestDTO  (required)
+     * @param userLoginRequestDTO (required)
      * @return Successful log in (status code 200)
-     *         or No such user found (status code 400)
-     *         or When something went wrong (status code 500)
+     * or No such user found (status code 400)
+     * or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "login",
@@ -136,7 +136,7 @@ public interface AuthorizeApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<JWTResponseDTO> login(
+    default ResponseEntity<?> login(
         @Parameter(name = "UserLoginRequestDTO", description = "", required = true) @Valid @RequestBody UserLoginRequestDTO userLoginRequestDTO
     ) {
         getRequest().ifPresent(request -> {
@@ -156,10 +156,10 @@ public interface AuthorizeApi {
     /**
      * POST /authorize/register : Method to register user
      *
-     * @param userRegisterRequestDTO  (required)
+     * @param userRegisterRequestDTO (required)
      * @return Successful register (status code 200)
-     *         or This email has already been registered (status code 400)
-     *         or When something went wrong (status code 500)
+     * or This email has already been registered (status code 400)
+     * or When something went wrong (status code 500)
      */
     @Operation(
         operationId = "register",
@@ -181,7 +181,7 @@ public interface AuthorizeApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<JWTResponseDTO> register(
+    default ResponseEntity<?> register(
         @Parameter(name = "UserRegisterRequestDTO", description = "", required = true) @Valid @RequestBody UserRegisterRequestDTO userRegisterRequestDTO
     ) {
         getRequest().ifPresent(request -> {
